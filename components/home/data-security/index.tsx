@@ -6,6 +6,7 @@ import KeySeedsCard from "./KeySeedsCard";
 import MessageEncryptionCard from "./MessageEncryptionCard";
 import Typography from "./Typography";
 import Background from "./Background";
+import Link from "next/link";
 
 const DataSecurity = () => {
   return (
@@ -19,10 +20,12 @@ const DataSecurity = () => {
           <MessageEncryptionCard />
         </Container>
 
-        <Button
-          text="Watch Demo →"
-          className="text-white w-[256px] mx-auto block relative mb-5"
-        />
+        <Link href="/watch-demo">
+          <Button
+            text="Watch Demo →"
+            className="text-white w-[256px] mx-auto block relative mb-5"
+          />
+        </Link>
 
         <BottomEllipse className="w-full h-auto relative" />
       </div>
