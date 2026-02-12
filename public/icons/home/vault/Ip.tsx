@@ -1,6 +1,6 @@
-import React from "react";
+import { SvgProps } from "@/types/svg";
 
-const Ip = () => {
+const Ip = ({ className = "" }: SvgProps) => {
   return (
     <svg
       width="17"
@@ -8,6 +8,7 @@ const Ip = () => {
       viewBox="0 0 17 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M4.229 4.38913V5.66467"

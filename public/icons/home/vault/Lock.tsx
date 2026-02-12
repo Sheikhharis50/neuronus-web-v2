@@ -1,6 +1,6 @@
-import React from "react";
+import { SvgProps } from "@/types/svg";
 
-const Lock = () => {
+const Lock = ({ className = "" }: SvgProps) => {
   return (
     <svg
       width="15"
@@ -8,6 +8,7 @@ const Lock = () => {
       viewBox="0 0 15 15"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M3.2922 6.07787V4.68614C3.2922 2.38282 3.98806 0.510947 7.46739 0.510947C10.9467 0.510947 11.6426 2.38282 11.6426 4.68614V6.07787"
