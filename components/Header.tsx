@@ -10,9 +10,15 @@ interface HeaderProps {
   title: React.ReactNode;
   description: string;
   children?: React.ReactNode;
+  classes?: { descClass?: string };
 }
 
-const Header = ({ description, title, children = null }: HeaderProps) => {
+const Header = ({
+  description,
+  title,
+  children = null,
+  classes = {},
+}: HeaderProps) => {
   return (
     <>
       <header className="relative bg-primary overflow-hidden">
@@ -47,7 +53,9 @@ const Header = ({ description, title, children = null }: HeaderProps) => {
             <h1 className="text-[32px] sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-center mb-4 md:mb-6 xl:mb-10 gradient-text">
               {title}
             </h1>
-            <p className="text-sm sm:text-base lg:text-lg xl:text-xl 2xl:text-[22px] text-white/70 text-center">
+            <p
+              className={`text-sm sm:text-base lg:text-lg xl:text-xl 2xl:text-[22px] text-white/70 text-center ${classes.descClass || ""}`}
+            >
               {description}
             </p>
             {children}
