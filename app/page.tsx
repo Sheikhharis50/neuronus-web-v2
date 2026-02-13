@@ -9,7 +9,7 @@ import PoweredByNuronus from "@/components/home/PoweredByNuronus";
 import Communication from "@/components/home/communication";
 import Vault from "@/components/home/vault-&-storage";
 import WorkSpace from "@/components/home/workspace";
-import Finance from "@/components/home/Finance/Index";
+import Finance from "@/components/home/finance";
 
 export default function Home() {
   return (

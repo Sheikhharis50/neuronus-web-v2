@@ -7,7 +7,7 @@ import Slider from "./Slider";
 
 const HideAssets = () => {
   return (
-    <ThunderCard className="h-full mr-5 sm:mr-8 xl:mr-10 w-71! xs:w-90! sm:w-105! xl:w-130! 2xl:w-140! overflow-hidden">
+    <ThunderCard className="h-full w-71! xs:w-90! sm:w-105! xl:w-130! 2xl:w-140! overflow-hidden">
       <div className="relative">
         <Image
           src={bg}
