@@ -21,7 +21,7 @@ const Navbar = () => {
         />
         <div className="flex gap-2.5 items-center">
           <Toolbox className="w-5.5 sm:w-6.5 h-auto" />
-          <Github className={hiddenBelowXl} />
+          <Github className={`${hiddenBelowXl} text-white`} />
         </div>
         <Menu />
       </div>
