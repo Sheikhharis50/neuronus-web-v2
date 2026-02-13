@@ -19,7 +19,7 @@ const ThunderCard = ({
         height={1000}
         className="size-full object-cover absolute top-0 left-0"
       />
-      <div className="relative">{children}</div>
+      <div className="relative size-full">{children}</div>
     </div>
   );
 };

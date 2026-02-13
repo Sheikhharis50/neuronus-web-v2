@@ -21,8 +21,8 @@ export default function SecureBrowserCard() {
   ];
 
   return (
-    <div className="mx-auto min-[400px]:mx-0 px-3 sm:px-5.25 pb-5.75 rounded-[22px] bg-[#D6E2FF] relative overflow-hidden w-fit mb-10">
-      <div className="relative bg-[#F2F6FF]/69 w-68 xxs:w-70 2xl:w-83 h-35 2xl:h-41.5 rounded-b-full flex items-end justify-center mb-7 xxs:mb-10 2xl:mb-12 mx-0 xxs:mx-5 sm:mx-18 2xl:mx-21.25">
+    <div className="px-3 sm:px-5 pb-5.75 rounded-[22px] bg-[#D6E2FF] relative overflow-hidden w-70 xxs:w-fit h-full">
+      <div className="relative bg-[#F2F6FF]/69 w-[90%] xxs:w-67 xs:w-80 lg:w-65 2xl:w-83 h-35 2xl:h-41.5 rounded-b-full flex items-end justify-center mb-7 xxs:mb-10 2xl:mb-12 mx-auto xxs:mx-5 sm:mx-18 2xl:mx-21.25">
         <div className="size-12 sm:size-16 2xl:size-20 bg-backlight rounded-full flex items-center justify-center translate-y-1/4 px-3 sm:px-4 2xl:px-5">
           <NeuroBrowser className="text-white w-full h-auto" />
         </div>
