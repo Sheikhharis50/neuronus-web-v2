@@ -1,5 +1,4 @@
 import { SvgProps } from "@/types/svg";
-import React from "react";
 
 const Clock = ({ className = "" }: SvgProps) => {
   return (
