@@ -10,6 +10,7 @@ interface RightSliderProps {
   description: string;
   products: ProductCatalogType[];
   slides: React.ReactNode[];
+  classes?: { root?: string };
 }
 
 const RightSlider = ({
@@ -17,9 +18,10 @@ const RightSlider = ({
   products,
   slides,
   title,
+  classes = {},
 }: RightSliderProps) => {
   return (
-    <section className="pb-20 pt-26 sm:py-32 lg:py-40">
+    <section className={`pb-20 pt-26 sm:py-32 lg:py-40 ${classes.root || ""}`}>
       <Heading className="text-center mb-3">{title}</Heading>
       <Description
         className="text-center mb-16 sm:mb-20 lg:mb-32"
