@@ -6,6 +6,7 @@ import KeySeedsCard from "./KeySeedsCard";
 import MessageEncryptionCard from "./MessageEncryptionCard";
 import Typography from "./Typography";
 import Background from "./Background";
+import Link from "next/link";
 import Github from "@/public/icons/Github";
 
 const DataSecurity = () => {
@@ -21,10 +22,12 @@ const DataSecurity = () => {
         </Container>
 
         <div className="relative flex justify-center items-center gap-5 md:gap-8 mb-10 md:mb-5">
-          <Button
-            text="Watch Demo →"
-            className="text-white w-45 xs:w-50 md:w-58 lg:w-64"
-          />
+          <Link href="/watch-demo">
+            <Button
+              text="Watch Demo →"
+              className="text-white w-45 xs:w-50 md:w-58 lg:w-64"
+            />
+          </Link>
           <Github className="text-backlight w-7 md:w-9 h-auto" />
         </div>
 
