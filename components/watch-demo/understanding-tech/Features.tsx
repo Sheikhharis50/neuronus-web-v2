@@ -51,10 +51,10 @@ const Features = () => {
       <BasicRulesEllipse className="absolute w-full h-full object-cover hidden lg:block" />
       <BasicRulesEllipseVerticle className="lg:hidden absolute size-full object-cover" />
       <Container className="relative py-20 md:py-30 lg:py-0 grid grid-cols-1 lg:grid-cols-4 gap-16 md:gap-20 lg:gap-0 lg:h-150 xl:h-170 2xl:h-200 items-center">
-        {features.map((feature) => (
+        {features.map((feature, i) => (
           <div
             className="flex flex-col gap-3 items-center justify-center text-center"
-            key={`understanding-tech-${feature}`}
+            key={`understanding-tech-feature-${i}`}
           >
             <feature.icon className="w-8 sm:w-10 lg:w-12 xl:w-auto h-auto" />
             <Description className="font-semibold text-black!">

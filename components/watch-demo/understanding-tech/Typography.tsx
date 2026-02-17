@@ -6,7 +6,10 @@ import IconWrapper from "./IconWrapper";
 const Typography = () => {
   return (
     <div className="space-y-2.5">
-      <Description text="Understanding The Tech" className="text-backlight!" />
+      <Description
+        text="Understanding The Tech"
+        className="text-backlight! font-semibold"
+      />
       <Heading>What is Zero-Knowledge?</Heading>
       <Description
         className="mb-10"
