@@ -1,5 +1,3 @@
-import React from "react";
-
 const SPNBg = () => {
   return (
     <svg
@@ -9,7 +7,7 @@ const SPNBg = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      className="w-[495px] h-auto"
+      className="w-123.75 h-auto"
     >
       <rect
         width="547.488"

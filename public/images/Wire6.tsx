@@ -1,5 +1,3 @@
-import React from "react";
-
 const Wire6 = () => {
   return (
     <svg

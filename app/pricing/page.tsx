@@ -1,4 +1,8 @@
 import Header from "@/components/Header";
+import BasicRules from "@/components/home/basic-rules";
+import Subscription from "@/components/pricing";
+import Comparing from "@/components/pricing/comparing-plans";
+import FreedomPlan from "@/components/pricing/freedom-plan";
 
 const PricingPage = () => {
   return (
@@ -12,6 +16,10 @@ const PricingPage = () => {
         description="Encrypted tools that protect your identity. Your online life stays hidden — safe, private, and in your control."
         classes={{ descClass: "pb-40" }}
       />
+      <Subscription />
+      <FreedomPlan />
+      <Comparing />
+      <BasicRules paymentSection={true} />
     </>
   );
 };
