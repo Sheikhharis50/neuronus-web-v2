@@ -73,7 +73,7 @@ export const vaultProducts: ProductCatalog[] = [
   {
     title: "Quantumography ",
     description: "Concealing data inside image files.",
-    productIcon: <Quantumography className="w-full h-auto" />,
+    productIcon: <Quantumography className="w-full h-auto text-backlight" />,
   },
 ];
 export const WorkSpaceProducts: ProductCatalog[] = [

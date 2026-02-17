@@ -7,6 +7,7 @@ import MessageEncryptionCard from "./MessageEncryptionCard";
 import Typography from "./Typography";
 import Background from "./Background";
 import Link from "next/link";
+import Github from "@/public/icons/Github";
 
 const DataSecurity = () => {
   return (
@@ -20,12 +21,15 @@ const DataSecurity = () => {
           <MessageEncryptionCard />
         </Container>
 
-        <Link href="/watch-demo">
-          <Button
-            text="Watch Demo →"
-            className="text-white w-[256px] mx-auto block relative mb-5"
-          />
-        </Link>
+        <div className="relative flex justify-center items-center gap-5 md:gap-8 mb-10 md:mb-5">
+          <Link href="/watch-demo">
+            <Button
+              text="Watch Demo →"
+              className="text-white w-45 xs:w-50 md:w-58 lg:w-64"
+            />
+          </Link>
+          <Github className="text-backlight w-7 md:w-9 h-auto" />
+        </div>
 
         <BottomEllipse className="w-full h-auto relative" />
       </div>
