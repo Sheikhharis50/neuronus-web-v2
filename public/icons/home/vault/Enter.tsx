@@ -1,6 +1,6 @@
-import React from "react";
+import { SvgProps } from "@/types/svg";
 
-const Enter = () => {
+const Enter = ({ className = "" }: SvgProps) => {
   return (
     <svg
       width="15"
@@ -8,6 +8,7 @@ const Enter = () => {
       viewBox="0 0 15 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={className}
     >
       <path
         d="M4.14236 7.71573L0.56897 4.14234L4.14236 0.568947"

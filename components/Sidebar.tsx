@@ -37,7 +37,7 @@ const Sidebar = () => {
           </button>
           <div className="flex items-center justify-between py-8">
             <Logo light />
-            <Github />
+            <Github className="text-white" />
           </div>
           <NavLinks sidebar />
         </div>
