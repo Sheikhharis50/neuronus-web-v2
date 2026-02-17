@@ -41,7 +41,7 @@ export type ProductValuation = {
 
 export const productValuationData: ProductValuation[] = [
   {
-    icon: <NeuroMail className="w-4.75 sm:w-5.75 h-auto" />,
+    icon: <NeuroMail className="w-4.75 sm:w-5.75 h-auto text-white" />,
     name: "Neuro Mail",
     dailyRevenue: "$1,000",
     shareOfPool: "10%",
@@ -67,7 +67,7 @@ export const productValuationData: ProductValuation[] = [
     pathId: "#wire2",
   },
   {
-    icon: <NeuroCoin className="size-5.5 sm:size-7" />,
+    icon: <NeuroCoin className="size-5.5 sm:size-7 text-white" />,
     name: "Neuro Coin",
     dailyRevenue: "$2,000",
     shareOfPool: "20%",
@@ -120,7 +120,7 @@ export const productValuationData: ProductValuation[] = [
     pathId: "#wire6",
   },
   {
-    icon: <NeuroSPN />,
+    icon: <NeuroSPN className="text-white" />,
     name: "Neuro SPN",
     dailyRevenue: "$2,000",
     shareOfPool: "20%",
