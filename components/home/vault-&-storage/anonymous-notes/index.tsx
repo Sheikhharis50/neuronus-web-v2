@@ -129,7 +129,7 @@ const AnonymousNotes = () => {
               />
               <Pill
                 text="Lifetime"
-                icon={<Lock className="w-3 xs:w-3.75 h-auto" />}
+                icon={<Lock className="w-3 xs:w-3.75 h-auto text-black" />}
               />
               <Pill
                 className="mx-auto"
