@@ -27,7 +27,7 @@ const Encryption = () => {
         ]}
         value={activeTab}
         onChange={setActiveTab}
-        className="my-9"
+        className="mx-auto mb-5"
       />
 
       {activeTab === "signup" ? <SignupFlow /> : <EncryptMessage />}
