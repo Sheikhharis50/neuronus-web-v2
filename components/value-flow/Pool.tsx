@@ -7,7 +7,7 @@ import { zBubbles, zThunder, zToolTip } from "@/data/constants/zIndexes";
 const Pool = () => {
   return (
     <div className="overflow-hidden relative">
-      <div className="container p-5 mx-auto relative pt-50">
+      <div className="relative pt-50">
         <Image
           src={dots}
           alt="dots"
@@ -29,7 +29,7 @@ const Pool = () => {
             loop
             muted
             playsInline
-            className="w-[60%] h-17 xxs:h-20 xs:h-22.5 min-[528px]:h-28 lg:h-32.5 absolute top-[15.5%] left-1/2 -translate-x-1/2 [clip-path:ellipse(50%_50%)] object-cover"
+            className="w-[60%] h-18 xxs:h-21 xs:h-24.5 min-[550px]:h-28.5 md:h-30 min-[900px]:h-33.5 lg:h-36 2xl:h-32.5 absolute top-[15.5%] left-1/2 -translate-x-1/2 [clip-path:ellipse(50%_50%)] object-cover"
           >
             <source src="/videos/pool-waves.mp4" type="video/mp4" />
           </video>
