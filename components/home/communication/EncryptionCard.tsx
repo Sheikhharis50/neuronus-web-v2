@@ -1,4 +1,3 @@
-import React from "react";
 import ThunderCard from "../../ThunderCardBg";
 import Top from "@/public/images/home/Top-Card.png";
 import Image from "next/image";

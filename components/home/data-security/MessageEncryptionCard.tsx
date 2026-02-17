@@ -1,6 +1,5 @@
 import Arrow from "@/public/images/home/Arrow";
 import LockSwitch from "@/public/images/home/LockSwitch";
-import React from "react";
 import HeadingBadge from "./HeadingBadge";
 import MovingCursor from "./MovingCursor";
 
