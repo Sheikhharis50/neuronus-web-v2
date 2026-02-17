@@ -4,7 +4,7 @@ import brain from "@/public/images/header-brain.png";
 import BasicRulesEllipse from "@/public/images/home/BasicRulesEllipse";
 import BasicRulesEllipseVerticle from "@/public/images/home/BasicRulesEllipseVerticle";
 
-const Background = () => {
+const Background = ({ watchDemo = false }) => {
   return (
     <>
       <Image
@@ -36,11 +36,19 @@ const Background = () => {
       >
         <source src="/videos/basic-rules-cloud.mp4" type="video/mp4" />
       </video>
-      <div className="size-50 lg:size-80 xl:size-100 absolute left-1/5 top-1/3 bg-[#0180EA] rounded-full blur-[90px] lg:blur-[150px]" />
-      <div className="size-50 lg:size-80 xl:size-100 absolute right-1/5 top-1/2 bg-[#7CCDF4] rounded-full blur-[90px] lg:blur-[150px]" />
+      {!watchDemo && (
+        <>
+          <div className="size-50 lg:size-80 xl:size-100 absolute left-1/5 top-1/3 bg-[#0180EA] rounded-full blur-[90px] lg:blur-[150px]" />
+          <div className="size-50 lg:size-80 xl:size-100 absolute right-1/5 top-1/2 bg-[#7CCDF4] rounded-full blur-[90px] lg:blur-[150px]" />
+        </>
+      )}
       <div className="w-[15%] h-1/2 absolute left-1/2 translate-y-1/2 bottom-0 bg-[#FFC8C15E] blur-[100px]" />
-      <BasicRulesEllipse className="absolute w-full h-180 2xl:h-200 object-cover bottom-0 hidden lg:block" />
-      <BasicRulesEllipseVerticle className="lg:hidden absolute top-0 left-0 size-full object-cover" />
+      {!watchDemo && (
+        <>
+          <BasicRulesEllipse className="absolute w-full h-180 2xl:h-200 object-cover bottom-0 hidden lg:block" />
+          <BasicRulesEllipseVerticle className="lg:hidden absolute top-0 left-0 size-full object-cover" />
+        </>
+      )}
       <Image
         src={brain}
         alt="brain"
