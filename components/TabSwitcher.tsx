@@ -19,7 +19,7 @@ const TabSwitcher = ({
   return (
     <div
       className={`bg-radial-[43.45%_44.45%_at_56.56%_20.66%,#2E3E99_0%,#4C67FF_100%,#4C67FF] 
-      text-sm sm:text-lg font-semibold text-white w-fit mx-auto p-1 rounded-full ${className}`}
+      text-sm sm:text-lg font-semibold text-white w-fit p-1 rounded-full ${className}`}
     >
       {options.map((option) => {
         const isActive = value === option.value;
