@@ -14,7 +14,7 @@ const PricingPage = () => {
           </span>
         }
         description="Encrypted tools that protect your identity. Your online life stays hidden — safe, private, and in your control."
-        classes={{ descClass: "pb-40" }}
+        classes={{ desc: "pb-40" }}
       />
       <Subscription />
       <FreedomPlan />
