@@ -1,4 +1,4 @@
-export const subscriptionCardsDataMonthly = [
+export const subscriptionCardsData = [
   {
     recomended: false,
     title: "Free",

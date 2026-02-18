@@ -3,6 +3,7 @@ import bg from "@/public/images/home/basic-rules-bg.png";
 import brain from "@/public/images/header-brain.png";
 import BasicRulesEllipse from "@/public/images/home/BasicRulesEllipse";
 import BasicRulesEllipseVerticle from "@/public/images/home/BasicRulesEllipseVerticle";
+import Video from "@/components/Video";
 
 const Background = ({ watchDemo = false }) => {
   return (
@@ -27,15 +28,10 @@ const Background = ({ watchDemo = false }) => {
       <div className="translate-y-3/5 size-1/2 bg-[#FCF1EE] blur-[20px] absolute bottom-0 left-[10%] rounded-[50%/50%] " />
       <div className="translate-x-[55%] -translate-y-1/3 size-4/5 bg-[#FFFDF4] blur-[50px] absolute top-0 left-0 rounded-[50%/50%] " />
       <div className="translate-y-[-5%] translate-x-[5%] absolute h-4/5 w-2/3 right-0 top-0 bg-[#B8BDD3] rounded-[50%/50%] blur-[161px]" />
-      <video
-        playsInline
-        autoPlay
-        loop
-        muted
+      <Video
         className="absolute top-0 left-0 size-full object-cover mix-blend-plus-lighter"
-      >
-        <source src="/videos/basic-rules-cloud.mp4" type="video/mp4" />
-      </video>
+        src="/videos/basic-rules-cloud.mp4"
+      />
       {!watchDemo && (
         <>
           <div className="size-50 lg:size-80 xl:size-100 absolute left-1/5 top-1/3 bg-[#0180EA] rounded-full blur-[90px] lg:blur-[150px]" />

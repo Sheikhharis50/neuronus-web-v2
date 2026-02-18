@@ -7,6 +7,7 @@ import Background from "./Background";
 import thunder from "@/public/images/home/header-card-thunder.png";
 import question from "@/public/images/home/neuronus-protects-question.png";
 import Coins from "./Coins";
+import Video from "@/components/Video";
 
 const NeuronusProtects = () => {
   return (
@@ -44,15 +45,10 @@ const NeuronusProtects = () => {
             height={800}
             className="size-32 xs:size-40 md:size-50 lg:size-60 2xl:size-70 relative opacity-85"
           />
-          <video
-            loop
-            autoPlay
-            muted
-            playsInline
+          <Video
             className="absolute size-full top-0 left-0 mix-blend-lighten origin-center scale-280"
-          >
-            <source src="/videos/space.mp4" type="video/mp4" />
-          </video>
+            src="/videos/space.mp4"
+          />
         </div>
       </div>
       <Coins />

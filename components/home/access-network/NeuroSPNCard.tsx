@@ -3,6 +3,7 @@ import SliderCardPill from "@/components/SliderCardPill";
 import hand from "@/public/images/home/access-network-mobile.png";
 import Power from "@/public/icons/home/accessNetork/Power";
 import ThunderCard from "@/components/ThunderCardBg";
+import Video from "@/components/Video";
 
 const NeuroSPNCard = () => {
   return (
@@ -21,15 +22,10 @@ const NeuroSPNCard = () => {
       <div className="flex flex-col justify-between h-full">
         <SliderCardPill text="SPN" className="ml-3 sm:ml-5 mt-5 md:m-6" />
         <div className="relative">
-          <video
-            loop
-            muted
-            playsInline
-            autoPlay
+          <Video
             className="absolute w-full h-1/2 left-0 top-1/2 -translate-y-1/2 object-cover mix-blend-plus-lighter"
-          >
-            <source src="/videos/globe.mp4" type="video/mp4" />
-          </video>
+            src="/videos/globe.mp4"
+          />
           <Image
             src={hand}
             alt="mobile in hand"
