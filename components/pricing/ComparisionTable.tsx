@@ -50,7 +50,7 @@ const ComparisionTable = ({ annual, plans }: ComparisionTabeProps) => {
                       </p>
                     </div>
                     <button
-                      className={`mt-2 mb-2 sm:mb-7 md:mb-11.5 text-[5.9px] md:text-[9px] text-[#4C67FF] lg:text-xs 2xl:text-sm py-1.5 sm:py-3 px-3 2xl:px-10 font-normal rounded-full border border-[#4C67FF]  ${index === 2 ? " text-white bg-radial-[43.45%_44.45%_at_56.56%_20.66%,#2E3E99_0%,#4C67FF_100%,#4C67FF]" : ""}`}
+                      className={`mt-2 mb-2 sm:mb-7 md:mb-11.5 text-[5.91px] md:text-[9px] text-[#4C67FF] whitespace-nowrap lg:text-xs 2xl:text-sm py-1.5 sm:py-3 px-3 2xl:px-10 font-normal rounded-full border border-[#4C67FF]  ${index === 2 ? " text-white bg-radial-[43.45%_44.45%_at_56.56%_20.66%,#2E3E99_0%,#4C67FF_100%,#4C67FF]" : ""}`}
                     >
                       Get {plan.buttonText}
                     </button>

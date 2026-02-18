@@ -50,7 +50,7 @@ const SubscriptionCard = ({
 
   return (
     <div
-      className={`p-1 flex flex-col h-full ${recomended ? "rounded-[22px] bg-backlight" : ""}`}
+      className={`flex flex-col h-fit sm:h-full ${recomended ? "rounded-[22px] bg-backlight" : ""}`}
     >
       <p
         className={`text-center text-2xl py-2 text-white ${recomended ? "" : "invisible"}`}
@@ -104,7 +104,7 @@ const SubscriptionCard = ({
         </div>
         <Button
           text={buttonText}
-          className=" py-4! 2xl:py-5! px-12 2xl:px-15 text-base! 2xl:text-[19px]! my-3.5"
+          className=" py-4! 2xl:py-5! px-12 2xl:px-15 text-base! whitespace-nowrap my-3.5"
         />
         <div className="flex items-center justify-center gap-2 mb-12">
           <CreaditCard />

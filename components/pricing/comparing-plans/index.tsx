@@ -12,7 +12,7 @@ const Comparing = () => {
   const [activeTab, setActiveTab] = useState<"monthly" | "yearly">("monthly");
 
   return (
-    <Container className="py-20">
+    <Container className="py-10 sm:py-20">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-0">
         <Heading>Compare All Plans</Heading>
 
