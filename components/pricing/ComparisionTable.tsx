@@ -38,7 +38,7 @@ const ComparisionTable = ({ annual, plans }: ComparisionTabeProps) => {
                 <th className="border-r border-b border-[#B4B4B4]"></th>
                 {plans.map((plan, index) => (
                   <th key={plan.title} className={`${HeaderClass}`}>
-                    <h1 className="text-[10px] sm:text-sm lg:text-base xl:text-lg 2xl:text-2xl font-semibold">
+                    <h1 className="text-[10px] whitespace-nowrap sm:text-sm lg:text-base xl:text-lg 2xl:text-2xl font-semibold">
                       Neuronus {plan.title}
                     </h1>
                     <div className="flex items-baseline mt-2 sm:mt-10">
