@@ -2,6 +2,7 @@ import Arrow from "@/public/images/home/Arrow";
 import LockSwitch from "@/public/images/home/LockSwitch";
 import HeadingBadge from "./HeadingBadge";
 import MovingCursor from "./MovingCursor";
+import Video from "@/components/Video";
 
 const MessageEncryptionCard = () => {
   return (
@@ -34,15 +35,10 @@ const MessageEncryptionCard = () => {
       </p>
 
       {/* Lock Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      <Video
         className="absolute w-full h-1/2 object-cover top-1/2 -translate-y-1/2 left-0 mix-blend-screen"
-      >
-        <source src="/videos/data-security-lock.mp4" type="video/mp4" />
-      </video>
+        src="/videos/data-security-lock.mp4"
+      />
 
       {/* Cursor */}
       <MovingCursor />

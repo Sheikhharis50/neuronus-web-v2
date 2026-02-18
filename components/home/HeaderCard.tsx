@@ -8,6 +8,7 @@ import WiresLeft from "@/public/images/home/WiresLeft";
 import WiresRight from "@/public/images/home/WiresRight";
 import WiresTop from "@/public/images/home/WiresTop";
 import WiresBottom from "@/public/images/home/WiresBottom";
+import Video from "@/components/Video";
 
 interface HeaderCardProps {
   classes?: { root?: string };
@@ -89,15 +90,10 @@ const HeaderCard = ({ classes = {}, small = false }: HeaderCardProps) => {
           }`}
         />
 
-        <video
-          loop
-          muted
-          autoPlay
-          playsInline
+        <Video
           className="absolute size-full object-cover object-center scale-200 top-0 left-0 mix-blend-lighten"
-        >
-          <source src="/videos/space.mp4" type="video/mp4" />
-        </video>
+          src="/videos/space.mp4"
+        />
 
         {/* Neuronus Circle */}
         <div
