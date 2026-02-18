@@ -1,6 +1,7 @@
 import Image from "next/image";
 import bg from "@/public/images/home/data-security-bg.png";
 import thunder from "@/public/images/home/data-security-thunder.png";
+import Video from "@/components/Video";
 
 const Background = () => {
   return (
@@ -22,26 +23,16 @@ const Background = () => {
       />
 
       {/* Thunder Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      <Video
         className="absolute size-full object-cover top-0 left-0 mix-blend-screen"
-      >
-        <source src="/videos/data-security-thunder.mp4" type="video/mp4" />
-      </video>
+        src="/videos/data-security-thunder.mp4"
+      />
 
       {/* Bubbles Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      <Video
         className="absolute size-full object-cover top-0 left-0 mix-blend-screen"
-      >
-        <source src="/videos/data-security-bubbles.mp4" type="video/mp4" />
-      </video>
+        src="/videos/data-security-bubbles.mp4"
+      />
     </>
   );
 };

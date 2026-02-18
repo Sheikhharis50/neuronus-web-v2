@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import BasicRules from "@/components/home/basic-rules";
-import Subscription from "@/components/pricing";
+import Subscription from "@/components/pricing/subscription";
 import Comparing from "@/components/pricing/comparing-plans";
 import FreedomPlan from "@/components/pricing/freedom-plan";
 

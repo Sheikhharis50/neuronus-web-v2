@@ -56,12 +56,13 @@ const BasicRules = ({ paymentSection = false }) => {
           ))}
         </Container>
         {paymentSection && (
-          <Description
-            text="Join thousands of privacy-conscious users who trust
-                Neuronus to protect their digital identity. No tracking. No
-               data mining. Just pure encryption."
-            className="relative text-center mx-auto py-25 text-black!"
-          />
+          <Description className="relative text-center mx-auto pb-20 py-0 lg:py-25 text-black!">
+            <>
+              Join thousands of privacy-conscious users who trust <br />{" "}
+              Neuronus to protect their digital identity. No tracking. No <br />{" "}
+              data mining. Just pure encryption.
+            </>
+          </Description>
         )}
       </div>
       <SectionMerger bottom />

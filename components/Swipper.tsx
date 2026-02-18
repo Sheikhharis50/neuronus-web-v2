@@ -3,6 +3,9 @@
 import { Swiper } from "swiper/react";
 import type { SwiperProps } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 interface AppSwiperProps extends SwiperProps {
   children: React.ReactNode;

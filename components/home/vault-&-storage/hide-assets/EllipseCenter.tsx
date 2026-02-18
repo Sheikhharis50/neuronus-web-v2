@@ -2,6 +2,7 @@ import Quantumography from "@/public/icons/Quantumography";
 import Image from "next/image";
 import dots from "@/public/images/home/vault/hide-assets-dots.png";
 import AnimatingElements from "./AnimatingElements";
+import Video from "@/components/Video";
 
 const EllipseCenter = () => {
   const baseClass = "flex justify-center items-center rounded-full";
@@ -25,15 +26,11 @@ const EllipseCenter = () => {
           <div
             className={`${baseClass} size-[70%] bg-white/64 shadow-2xl relative`}
           >
-            <video
-              loop
-              autoPlay
-              muted
-              playsInline
+            <Video
               className="absolute size-full object-cover mix-blend-lighten z-4"
-            >
-              <source src="/videos/hide-assets-circle.mp4" type="video/mp4" />
-            </video>
+              src="/videos/hide-assets-circle.mp4"
+            />
+
             <div
               className={`${baseClass} size-[80%] bg-linear-to-l from-[#42A4FF] to-transparent`}
             >

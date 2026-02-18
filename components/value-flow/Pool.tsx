@@ -3,6 +3,7 @@ import pool from "@/public/images/pool.png";
 import dots from "@/public/images/dots-pool.png";
 import thunder from "@/public/images/thunder.png";
 import { zBubbles, zThunder, zToolTip } from "@/data/constants/zIndexes";
+import Video from "@/components/Video";
 
 const Pool = () => {
   return (
@@ -24,15 +25,11 @@ const Pool = () => {
             height={2000}
             className="w-full h-auto mx-auto relative"
           />
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <Video
             className="w-[60%] h-18 xxs:h-21 xs:h-24.5 min-[550px]:h-28.5 md:h-30 min-[900px]:h-33.5 lg:h-36 2xl:h-32.5 absolute top-[15.5%] left-1/2 -translate-x-1/2 [clip-path:ellipse(50%_50%)] object-cover"
-          >
-            <source src="/videos/pool-waves.mp4" type="video/mp4" />
-          </video>
+            src="/videos/pool-waves.mp4"
+          />
+
           <div className="absolute bottom-1/5 xs:bottom-[21%] sm:bottom-[23%] left-1/2 -translate-x-1/2 text-center w-fit text-white text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl">
             <h2 className="font-NeueThin">Neuro Pool</h2>
             <p id="currentValuation" className="font-semibold">
@@ -59,15 +56,10 @@ const Pool = () => {
           height={1500}
           className={`size-full absolute top-[10%] left-0 object-contain ${zThunder}`}
         />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <Video
           className={`size-[130%] absolute top-0 right-0 mix-blend-lighten scale-270 xs:scale-220 sm:scale-190 md:scale-160 lg:scale-150 xl:scale-110 ${zBubbles}`}
-        >
-          <source src="/videos/bubble.mp4" type="video/mp4" />
-        </video>
+          src="/videos/bubble.mp4"
+        />
       </div>
       <div className="absolute -bottom-1 left-0 bg-linear-to-t from-primary to-transparent w-full h-15" />
     </div>
