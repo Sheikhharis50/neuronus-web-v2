@@ -1,6 +1,6 @@
 import Image from "next/image";
 import NeuronusWhite from "@/public/icons/home/NeuronusWhite";
-import thunder from "@/public/images/home/header-card-thunder.png";
+import thunder from "@/public/images/home/header/card-thunder.avif";
 import bg from "@/public/images/home/header-card-bg.png";
 import bgMobile from "@/public/images/home/header-card-bg-mob.png";
 import dots from "@/public/images/dots-landing-header.png";

@@ -2,7 +2,7 @@ import Heading from "../../Heading";
 import Description from "../../Description";
 import { CommunicationProducts } from "@/data/productCatalog";
 import ProductCatalog from "../../ProductCatalog";
-import thunder from "@/public/images/home/data-security-thunder.png";
+import thunder from "@/public/images/home/data-security/thunder.avif";
 import Image from "next/image";
 import Slider from "./Slider";
 import Container from "../../Container";
