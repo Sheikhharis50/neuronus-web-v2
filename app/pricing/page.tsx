@@ -1,8 +1,22 @@
+import dynamic from "next/dynamic";
 import Header from "@/components/Header";
-import BasicRules from "@/components/home/basic-rules";
-import Subscription from "@/components/pricing/subscription";
-import Comparing from "@/components/pricing/comparing-plans";
-import FreedomPlan from "@/components/pricing/freedom-plan";
+
+const Subscription = dynamic(
+  () => import("@/components/pricing/subscription"),
+  {
+    ssr: true,
+  }
+);
+const FreedomPlan = dynamic(() => import("@/components/pricing/freedom-plan"), {
+  ssr: true,
+});
+const Comparing = dynamic(
+  () => import("@/components/pricing/comparing-plans"),
+  { ssr: true }
+);
+const BasicRules = dynamic(() => import("@/components/home/basic-rules"), {
+  ssr: true,
+});
 
 const PricingPage = () => {
   return (
