@@ -1,5 +1,5 @@
 import Image from "next/image";
-import thunder from "@/public/images/home/header-card-thunder.png";
+import thunder from "@/public/images/home/header/card-thunder.avif";
 import encryption from "@/public/images/home/next-gen-encryption.png";
 import Video from "@/components/Video";
 
