@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import Close from "@/public/icons/home/Close";
 
 interface BaseModalProps {
@@ -8,17 +8,22 @@ interface BaseModalProps {
 }
 
 export const Modal = ({ isOpen, onClose, children }: BaseModalProps) => {
+  const scrollYRef = useRef(0);
+
   useEffect(() => {
     if (!isOpen) return;
 
     const scrollY = window.scrollY;
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
+    scrollYRef.current = scrollY;
 
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    requestAnimationFrame(() => {
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    });
 
     return () => {
       document.body.style.position = "";
@@ -26,7 +31,7 @@ export const Modal = ({ isOpen, onClose, children }: BaseModalProps) => {
       document.body.style.width = "";
       document.body.style.paddingRight = "";
 
-      window.scrollTo(0, scrollY);
+      window.scrollTo(0, scrollYRef.current);
     };
   }, [isOpen]);
 
