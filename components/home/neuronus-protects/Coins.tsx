@@ -2,14 +2,14 @@
 import Image from "next/image";
 import { gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
-import ghostCoin from "@/public/images/home/ghost-coin.png";
-import resonanceCoin from "@/public/images/home/resonance-coin.png";
-import neuronusCoin from "@/public/images/home/neuronus-coin.png";
-import neuroscreenCoin from "@/public/images/home/neuroscreen-coin.png";
-import neuroRSACoin from "@/public/images/home/neuroRSA-coin.png";
-import neuroDriveCoin from "@/public/images/home/neuroDrive-coin.png";
-import neuroMailCoin from "@/public/images/home/neuroMail-coin.png";
-import polygonCoin from "@/public/images/home/polygon-coin.png";
+import ghostCoin from "@/public/images/home/neuronus-protects/ghost-coin.avif";
+import resonanceCoin from "@/public/images/home/neuronus-protects/resonance-coin.avif";
+import neuronusCoin from "@/public/images/home/neuronus-protects/neuronus-coin.avif";
+import neuroscreenCoin from "@/public/images/home/neuronus-protects/neuroscreen-coin.avif";
+import neuroRSACoin from "@/public/images/home/neuronus-protects/neuroRSA-coin.avif";
+import neuroDriveCoin from "@/public/images/home/neuronus-protects/neuroDrive-coin.avif";
+import neuroMailCoin from "@/public/images/home/neuronus-protects/neuroMail-coin.avif";
+import polygonCoin from "@/public/images/home/neuronus-protects/polygon-coin.avif";
 
 const Coins = () => {
   const ghResRef = useRef<HTMLDivElement>(null);

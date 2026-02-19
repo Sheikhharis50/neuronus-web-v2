@@ -1,6 +1,6 @@
 import Image from "next/image";
-import bg from "@/public/images/home/neuronus-protects-bg.png";
-import ellipse from "@/public/images/home/neuronus-protects-ellipse.png";
+import bg from "@/public/images/home/neuronus-protects/bg.avif";
+import ellipse from "@/public/images/home/neuronus-protects/ellipse.avif";
 
 const Background = () => {
   return (

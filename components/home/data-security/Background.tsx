@@ -1,6 +1,6 @@
 import Image from "next/image";
 import bg from "@/public/images/home/data-security-bg.png";
-import thunder from "@/public/images/home/data-security-thunder.png";
+import thunder from "@/public/images/home/data-security/thunder.avif";
 import Video from "@/components/Video";
 
 const Background = () => {

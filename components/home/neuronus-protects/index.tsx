@@ -4,8 +4,8 @@ import Container from "@/components/Container";
 import Description from "@/components/Description";
 import ShadowButton from "@/components/ShadowButton";
 import Background from "./Background";
-import thunder from "@/public/images/home/header-card-thunder.png";
-import question from "@/public/images/home/neuronus-protects-question.png";
+import thunder from "@/public/images/home/header/card-thunder.avif";
+import question from "@/public/images/home/neuronus-protects/question.avif";
 import Coins from "./Coins";
 import Video from "@/components/Video";
 
