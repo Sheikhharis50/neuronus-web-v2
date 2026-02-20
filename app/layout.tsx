@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppContextsProvider } from "@/providers";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/footer";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,11 @@ export default function RootLayout({
           <Footer />
           <Sidebar />
         </AppContextsProvider>
+        <ToastContainer 
+          position="top-right"
+          autoClose={4000}
+          theme="colored"
+        />
       </body>
     </html>
   );
