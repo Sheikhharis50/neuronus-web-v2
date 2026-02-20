@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { Modal } from "../Modal";
 import Button from "../Button";
 import Warning from "@/public/icons/Warning";
+import { useAuthStore } from "@/store/useAuthStore";
 
 interface Props {
   isOpen: boolean;
@@ -11,6 +14,7 @@ const iconBg =
   "bg-[radial-gradient(43.45%_44.45%_at_56.56%_20.66%,_#2E3E99_0%,_#4C67FF_100%)]";
 
 export const CreateAccountPopup = ({ isOpen, onClose }: Props) => {
+  const openModal = useAuthStore((state) => state.openModal);
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="px-6 lg:pt-10 text-center overflow-y-auto ">
@@ -38,14 +42,18 @@ export const CreateAccountPopup = ({ isOpen, onClose }: Props) => {
           app
         </p>
         <Button
+          onClick={() => openModal("seedsRegister")}
           text="I understand, show me my seed"
           className=" text-[12px] md:text-[19px]! px-5 md:px-16 py-2 md:py-6! mt-10"
         />
         <p className="mt-4 mb-2 text-[14px] lg:text-xl">
           Already have account?{" "}
-          <Link href="/login" className="cursor-pointer text-[#36F]">
+          <span
+            onClick={() => openModal("loginSeeds")}
+            className="cursor-pointer text-[#36F]"
+          >
             Login here
-          </Link>{" "}
+          </span>{" "}
         </p>
       </div>
     </Modal>
