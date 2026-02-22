@@ -17,6 +17,7 @@ import NFile from "@/public/icons/home/registration/NFile";
 import XFile from "@/public/icons/home/registration/XFile";
 import Quantumography from "@/public/icons/Quantumography";
 import { useAuthStore } from "@/store/useAuthStore";
+import { authService } from "@/services/auth-service";
 
 interface Props {
   isOpen: boolean;
@@ -82,7 +83,12 @@ export const SelectRegistration = ({ isOpen, onClose }: Props) => {
         </span>
         <div className="flex justify-center flex-col items-center text-[15px] lg:text-[19px] ">
           <Button
-            onClick={()=>openModal("createAccount")}
+            onClick={() => authService.generateTotp()}
+            text="Generate TOTP"
+            className=" text-[12px] md:text-[19px]! px-18 md:px-30 py-3 md:py-5! mt-7"
+          />
+          <Button
+            onClick={() => openModal("createAccount")}
             text="Registration with Seeds"
             className=" text-[12px] md:text-[19px]! px-18 md:px-30 py-3 md:py-5! mt-7"
           />
