@@ -14,5 +14,10 @@ export const authService = {
   tokenverify: async () => {
     const response = await apiClient.post('auth/token/verify/');
     return response.data;
-  }
+  },
+
+  generateTotp: async () => {
+    const response = await apiClient.post('auth/totp/generate/');
+    return response.data;
+  },
 };
