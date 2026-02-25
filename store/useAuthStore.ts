@@ -156,4 +156,26 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isAuthenticated: true });
     }
   },
+
+  checkAuth: async () => {
+    if (typeof window === "undefined") return;
+    const token = localStorage.getItem("access_token");
+    const cryptoData = localStorage.getItem("crypto_data");
+    
+    if (!token || !cryptoData) {
+      set({ isAuthenticated: false });
+      return;
+    }
+    if (isTokenExpired(token)) {
+      try {
+        await apiClient.get('/api/auth/token/refresh-cookie/');
+        set({ isAuthenticated: true });
+      } catch {
+        set({ isAuthenticated: false });
+        localStorage.clear();
+      }
+    } else {
+      set({ isAuthenticated: true });
+    }
+  },
 }));
