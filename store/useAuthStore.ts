@@ -1,3 +1,4 @@
+import apiClient from '@/lib/api-client';
 import { deriveSeedsHash, generateSeedPhrase, handleSuccessfulLogin, performSignup } from '@/lib/cryptoOperations';
 import { authService } from '@/services/auth-service';
 import { toast } from 'react-toastify';
@@ -17,12 +18,22 @@ interface AuthState {
   // Actions
   openModal: (type: ModalType) => void;
   closeModal: () => void;
+  checkAuth: () => void;
   // Api Actions
   handleRegister: (retry?: boolean) => Promise<void>;
   resetRegState: () => void;
   loginWithSeeds: (seeds: string) => Promise<boolean>;
   loginWithOTP: (otp: string) => Promise<boolean>;
 }
+
+const isTokenExpired = (token: string) => {
+  try {
+    const { exp } = JSON.parse(atob(token.split('.')[1]));
+    return Date.now() >= exp * 1000;
+  } catch {
+    return true;
+  }
+};
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   activeModal: null,
@@ -74,8 +85,14 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const payload = { pass_phrase: seedsHash.loginHash };
       const response = await authService.generateToken(payload);
       await handleSuccessfulLogin(response, seeds);
-      set({ isAuthenticated: true, isLoading: false });
-      return true;
+      const token = localStorage.getItem("access_token");
+    
+      if (token) {
+        set({ isAuthenticated: true, isLoading: false, error: null });
+        return true;
+      } else {
+        throw new Error("Token not saved correctly");
+      }
     } catch (err: any) {
       console.error("Login Error Response:", err.response?.data);
       const is2FARequired = 
@@ -115,6 +132,28 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const message = err.response?.data?.message || err.response?.data?.[0] || "Invalid code";
       set({ error: message, isLoading: false });
       return false;
+    }
+  },
+
+  checkAuth: async () => {
+    if (typeof window === "undefined") return;
+    const token = localStorage.getItem("access_token");
+    const cryptoData = localStorage.getItem("crypto_data");
+    
+    if (!token || !cryptoData) {
+      set({ isAuthenticated: false });
+      return;
+    }
+    if (isTokenExpired(token)) {
+      try {
+        await apiClient.get('/api/auth/token/refresh-cookie/');
+        set({ isAuthenticated: true });
+      } catch {
+        set({ isAuthenticated: false });
+        localStorage.clear();
+      }
+    } else {
+      set({ isAuthenticated: true });
     }
   },
 }));

@@ -211,9 +211,11 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
           <Button
             disabled={(!requires2FA && seedsValue.length !== 16) || (requires2FA && otpValue.length !== 6) || isLoading}
             onClick={handleSubmit}
-            text={isLoading ? (requires2FA ? "Verifying..." : "Logging in...") : (requires2FA ? "Verify OTP" : "Login")}
-            className="text-[12px] md:text-[19px]! px-18 md:px-30 py-1.5 md:py-4! mt-7"
+            text={isLoading ? (requires2FA ? "Verifying" : "Logging in") : (requires2FA ? "Verify OTP" : "Login")}
+            className="text-[12px] md:text-[19px]! flex justify-center items-center gap-2 px-18 md:px-30 py-1.5 md:py-4! mt-7"
+            isLoading={isLoading || requires2FA}
           />
+
         </div>
 
         <div className="flex justify-center gap-5 xs:gap-10 mb-4 mt-6">
