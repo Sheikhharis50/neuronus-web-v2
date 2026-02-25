@@ -7,7 +7,7 @@ import { useAuthStore } from "@/store/useAuthStore";
 import { FreeAccount } from "@/components/popups/FreeAccount";
 import { SeedsRegistration } from "@/components/popups/SeedsRegistration";
 import { SelectRegistration } from "@/components/popups/SelectReagistration";
-
+import { SettingsPopup } from "@/components/popups/SettingsPopup";
 
 export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
   const activeModal = useAuthStore((state) => state.activeModal);
@@ -31,6 +31,9 @@ export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
       )}
       {activeModal === "selectRegistration" && (
         <SelectRegistration isOpen={true} onClose={closeModal} />
+      )}
+      {activeModal === "settings" && (
+        <SettingsPopup isOpen={true} onClose={closeModal} />
       )}
     </Suspense>
   );

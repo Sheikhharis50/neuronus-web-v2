@@ -3,13 +3,13 @@ import { authService } from '@/services/auth-service';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 
-type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | null;
+type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | 'settings' | null;
 
 interface AuthState {
   seedsData: any | null;
   error: any | null;
-  activeModal: ModalType; 
-  isLoading:boolean;
+  activeModal: ModalType;
+  isLoading: boolean;
   isGeneratingSeeds: boolean,
   isAuthenticated: boolean;
   // Actions
@@ -22,11 +22,11 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
-  activeModal: null, 
+  activeModal: null,
   seedsData: null,
   error: null,
-  isGeneratingSeeds:false,
-  isLoading:false,
+  isGeneratingSeeds: false,
+  isLoading: false,
   isAuthenticated: false,
 
   openModal: (type) => set({ activeModal: type }),
@@ -54,16 +54,16 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       toast.success("Succesfully get seeds")
     } catch (err: any) {
       if (!isRetry) {
-        return get().handleRegister(true); 
+        return get().handleRegister(true);
       }
       const message = err.response?.data?.[0] || "Registration failed. Please try again.";
       toast.error(message)
-      set({ seedsData:null, error: message, isGeneratingSeeds: false });
+      set({ seedsData: null, error: message, isGeneratingSeeds: false });
     }
   },
 
   loginWithSeeds: async (seeds: string) => {
-    set({isLoading : true, error: null });
+    set({ isLoading: true, error: null });
     try {
       const seedsHash = await deriveSeedsHash(seeds);
       const payload = { pass_phrase: seedsHash.loginHash };
@@ -74,7 +74,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } catch (err: any) {
       const message = err.response?.data?.message || "Login failed";
       set({ error: message, isLoading: false });
-      return false; 
+      return false;
     }
   },
 }));
