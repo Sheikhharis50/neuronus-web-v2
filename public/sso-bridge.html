@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSO Bridge</title>
+</head>
+<body>
+    <script>
+        const TRUSTED_ORIGINS = ["http://localhost:5173", "http://localhost:3001"];
+
+    window.addEventListener("message", async (event) => {
+    const ALLOWED_ORIGINS = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"];
+    if (!ALLOWED_ORIGINS.includes(event.origin)) return;
+    const appLockKey = `lock_${event.origin}`;
+
+    if (event.data.type === "REQUEST_AUTH_DATA") {
+        const isAppLocked = localStorage.getItem(appLockKey) === "true";
+        const accessToken = localStorage.getItem("access_token");
+
+        if (isAppLocked || !accessToken) {
+            event.source.postMessage({ 
+                type: "AUTH_DATA_RESPONSE", 
+                payload: { status: "LOCKED", hasSession: !!accessToken } 
+            }, event.origin);
+        } else {
+            event.source.postMessage({
+                type: "AUTH_DATA_RESPONSE",
+                payload: { 
+                    status: "AUTHORIZED",
+                    accessToken: accessToken,
+                    cryptoData: localStorage.getItem("crypto_data"),
+                    encryptionKey: localStorage.getItem("encryption-key")
+                }
+            }, event.origin);
+        }
+    }
+
+    if (event.data.type === "SET_LOCK") {
+        const appLockKey = `lock_${event.origin}`;
+        localStorage.setItem(appLockKey, "true");
+        const hasSession = !!localStorage.getItem("access_token");
+        event.source.postMessage({ 
+            type: "AUTH_DATA_RESPONSE", 
+            payload: { 
+                status: "LOCKED", 
+                hasSession: hasSession 
+            } 
+        }, event.origin);
+    }
+
+    if (event.data.type === "UNLOCK_APP") {
+    localStorage.removeItem(`lock_${event.origin}`);
+    const accessToken = localStorage.getItem("access_token");
+    event.source.postMessage({
+        type: "AUTH_DATA_RESPONSE",
+        payload: { 
+            status: "AUTHORIZED", 
+            accessToken: accessToken,
+            cryptoData: localStorage.getItem("crypto_data"),
+            encryptionKey: localStorage.getItem("encryption-key")
+        }
+    }, event.origin);
+}
+
+    if (event.data.type === "REFRESH_TOKEN_REQUEST") {
+    try {
+       const response = await fetch("https://api.prod.auth.neuronus.net/api/auth/token/refresh/", {
+            method: "POST", // Changed from GET to POST
+            headers: { 
+                "Accept": "application/json",
+                "Content-Type": "application/json" 
+            },
+            credentials: "include" // This sends the HttpOnly cookie
+        });
+
+    if (response.ok) {
+        const data = await response.json();
+        event.source.postMessage({
+        type: "TOKEN_REFRESHED",
+        payload: { accessToken: data.access }
+        }, event.origin);
+    } else {
+        throw new Error("Refresh failed");
+    }
+    } catch (err) {
+    event.source.postMessage({ type: "SESSION_EXPIRED" }, event.origin);
+    }
+}
+
+
+});
+ </script>
+</body>
+</html>
