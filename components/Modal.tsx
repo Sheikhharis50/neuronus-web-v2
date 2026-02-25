@@ -7,9 +7,10 @@ interface BaseModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  className?: string;
 }
 
-export const Modal = ({ isOpen, onClose, children }: BaseModalProps) => {
+export const Modal = ({ isOpen, onClose, children, className }: BaseModalProps) => {
   useEffect(() => {
     if (!isOpen) return;
 
@@ -38,10 +39,10 @@ export const Modal = ({ isOpen, onClose, children }: BaseModalProps) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
 
-      <div className="relative w-full max-w-[90vw] xs:max-w-[85vw] sm:max-w-125 md:max-w-140 lg:max-w-162 max-h-[90vh] overflow-y-auto rounded-3xl bg-[#F1F5FA] p-4">
+      <div className={`relative w-full max-h-[90vh] overflow-y-auto rounded-3xl bg-[#F1F5FA] ${className || 'max-w-[90vw] xs:max-w-[85vw] sm:max-w-125 md:max-w-140 lg:max-w-162 p-4'}`}>
         <button
           onClick={onClose}
-          className="absolute cursor-pointer right-4 top-4 hover:text-gray-200"
+          className="absolute cursor-pointer right-4 top-4 hover:text-gray-500 z-50 text-gray-500"
         >
           <Close />
         </button>
