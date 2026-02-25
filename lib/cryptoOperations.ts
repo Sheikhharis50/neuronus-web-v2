@@ -315,6 +315,7 @@ export function logoutUser(): void {
   localStorage.removeItem('access_token');
   localStorage.removeItem('crypto_data');
   localStorage.removeItem('encryption-key');
+  localStorage.removeItem('is_2fa');
 }
 
 // 10. Utility Functions
