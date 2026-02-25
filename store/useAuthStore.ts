@@ -12,6 +12,8 @@ interface AuthState {
   isLoading: boolean;
   isGeneratingSeeds: boolean,
   isAuthenticated: boolean;
+  requires2FA: boolean;
+  tempSeeds: string | null;
   // Actions
   openModal: (type: ModalType) => void;
   closeModal: () => void;
@@ -19,6 +21,7 @@ interface AuthState {
   handleRegister: (retry?: boolean) => Promise<void>;
   resetRegState: () => void;
   loginWithSeeds: (seeds: string) => Promise<boolean>;
+  loginWithOTP: (otp: string) => Promise<boolean>;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -28,9 +31,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   isGeneratingSeeds: false,
   isLoading: false,
   isAuthenticated: false,
+  requires2FA: false,
+  tempSeeds: null,
 
-  openModal: (type) => set({ activeModal: type }),
-  closeModal: () => set({ activeModal: null }),
+  openModal: (type) => set({ activeModal: type, requires2FA: false, tempSeeds: null }),
+  closeModal: () => set({ activeModal: null, requires2FA: false, tempSeeds: null }),
 
   resetRegState: () => set({ seedsData: null, error: null, isGeneratingSeeds: false }),
 
@@ -63,7 +68,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   loginWithSeeds: async (seeds: string) => {
-    set({ isLoading: true, error: null });
+    set({ isLoading: true, error: null, requires2FA: false, tempSeeds: null });
     try {
       const seedsHash = await deriveSeedsHash(seeds);
       const payload = { pass_phrase: seedsHash.loginHash };
@@ -72,7 +77,42 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isAuthenticated: true, isLoading: false });
       return true;
     } catch (err: any) {
-      const message = err.response?.data?.message || "Login failed";
+      console.error("Login Error Response:", err.response?.data);
+      const is2FARequired = 
+        err.response?.status === 400 && 
+        (err.response?.data?.totp_token || 
+         (typeof err.response?.data === 'object' && 'totp_token' in err.response.data));
+
+      if (is2FARequired) {
+        set({ requires2FA: true, tempSeeds: seeds, isLoading: false });
+        return false;
+      }
+      const message = err.response?.data?.message || err.response?.data?.[0] || err.response?.data?.non_field_errors?.[0] || "Login failed";
+      set({ error: message, isLoading: false });
+      return false;
+    }
+  },
+
+  loginWithOTP: async (otp: string) => {
+    const { tempSeeds } = get();
+    if (!tempSeeds) {
+      set({ error: "Session expired. Please try login again.", requires2FA: false });
+      return false;
+    }
+
+    set({ isLoading: true, error: null });
+    try {
+      const seedsHash = await deriveSeedsHash(tempSeeds);
+      const payload = { 
+        pass_phrase: seedsHash.loginHash,
+        totp_token: otp 
+      };
+      const response = await authService.generateToken(payload);
+      await handleSuccessfulLogin(response, tempSeeds);
+      set({ isAuthenticated: true, isLoading: false, requires2FA: false, tempSeeds: null });
+      return true;
+    } catch (err: any) {
+      const message = err.response?.data?.message || err.response?.data?.[0] || "Invalid code";
       set({ error: message, isLoading: false });
       return false;
     }

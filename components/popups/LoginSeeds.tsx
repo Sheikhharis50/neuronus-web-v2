@@ -16,12 +16,20 @@ interface Props {
 const Services = [{ name: "Help" }, { name: "Privacy" }, { name: "Terms" }];
 
 export const LoginSeeds = ({ isOpen, onClose }: Props) => {
+  const loginWithSeeds = useAuthStore((state) => state.loginWithSeeds);
+  const loginWithOTP = useAuthStore((state) => state.loginWithOTP);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const requires2FA = useAuthStore((state) => state.requires2FA);
   const openModal = useAuthStore((state) => state.openModal);
-  const { loginWithSeeds, isLoading } = useAuthStore();
+  const error = useAuthStore((state) => state.error);
+
   // Input States
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [seedsValue, setSeedsValue] = useState<string[]>([]);
+  const [otpValue, setOtpValue] = useState("");
+
+  console.log("LoginSeeds State:", { requires2FA, isLoading, error });
 
   // --- Handlers ---
 
@@ -69,6 +77,19 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
   };
 
   const handleSubmit = async () => {
+    if (requires2FA) {
+      if (otpValue.length !== 6) {
+        toast.error("Please enter a valid 6-digit code.");
+        return;
+      }
+      const success = await loginWithOTP(otpValue);
+      if (success) {
+        toast.success("Logged In Successfully.");
+        onClose();
+      }
+      return;
+    }
+
     // Join the 16 words into a single string
     const seedsString = seedsValue.join(" ");
 
@@ -77,7 +98,10 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
     if (success) {
       toast.success("Logged In Successfully.");
       onClose(); // Close modal
-      // router.push("/dashboard/folders");
+    } else {
+      // If not 2FA, the store error might be set. We can show it here if needed.
+      // But requires2FA should trigger a re-render.
+      console.log("Login failed, requires2FA is:", useAuthStore.getState().requires2FA);
     }
   };
 
@@ -95,74 +119,99 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
           Login
         </h3>
 
-        <div className="flex justify-between items-center px-4 md:px-8 mt-7">
-          <p className="text-[#000000B5] text-[14px] md:text-xl font-normal">
-            Your Seed
-          </p>
-          {seedsValue.length === 16 && (
-            <span className="text-green-600 text-sm font-bold flex items-center gap-1">
-              ✓ 16 Words Complete
-            </span>
-          )}
-        </div>
-
-        <div className="mt-2 bg-white min-h-28 rounded-xl border-[#ABABAB57] border mx-4 md:mx-7 p-4">
-          <div className="flex flex-wrap gap-2.5">
-            {seedsValue.map((seed, index) => (
-              <span
-                key={index}
-                onClick={() => removeSeed(index)}
-                className="group relative px-2 py-1.5 rounded-md border border-[#D5D5D5] bg-gray-50 font-normal text-[11px] lg:text-[18px] cursor-pointer hover:border-red-400"
-              >
-                {seed}
-                <span className="hidden group-hover:inline ml-1 text-red-500 text-xs">
-                  ×
+        {!requires2FA ? (
+          <>
+            <div className="flex justify-between items-center px-4 md:px-8 mt-7">
+              <p className="text-[#000000B5] text-[14px] md:text-xl font-normal">
+                Your Seed
+              </p>
+              {seedsValue.length === 16 && (
+                <span className="text-green-600 text-sm font-bold flex items-center gap-1">
+                  ✓ 16 Words Complete
                 </span>
-              </span>
-            ))}
+              )}
+            </div>
 
-            {seedsValue.length < 16 && (
+            <div className="mt-2 bg-white min-h-28 rounded-xl border-[#ABABAB57] border mx-4 md:mx-7 p-4">
+              <div className="flex flex-wrap gap-2.5">
+                {seedsValue.map((seed, index) => (
+                  <span
+                    key={index}
+                    onClick={() => removeSeed(index)}
+                    className="group relative px-2 py-1.5 rounded-md border border-[#D5D5D5] bg-gray-50 font-normal text-[11px] lg:text-[18px] cursor-pointer hover:border-red-400"
+                  >
+                    {seed}
+                    <span className="hidden group-hover:inline ml-1 text-red-500 text-xs">
+                      ×
+                    </span>
+                  </span>
+                ))}
+
+                {seedsValue.length < 16 && (
+                  <input
+                    autoFocus
+                    className="outline-none bg-transparent flex-1 min-w-[150px] text-[11px] lg:text-[20px] placeholder:text-gray-300"
+                    placeholder={
+                      seedsValue.length === 0 ? "Paste seeds or type here..." : ""
+                    }
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2 px-4 md:px-8 mt-3 h-8">
+              {suggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  onClick={() => addSeed(suggestion)}
+                  className="px-3 py-1 bg-[#36F1] text-[#36F] rounded-full text-xs lg:text-sm hover:bg-[#36F2] transition-colors"
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+
+            <p className="xxs:flex gap-2 xs:gap-4 text-[14px] lg:text-xl px-7 mt-7">
+              Don't have account yet?
+              <span
+                onClick={() => openModal("createAccount")}
+                className="cursor-pointer lg:underline text-[#36F] lg:text-black font-medium"
+              >
+                Register here
+              </span>
+            </p>
+          </>
+        ) : (
+          <div className="px-4 md:px-8 mt-7">
+            <p className="text-[#000000B5] text-[14px] md:text-xl font-normal mb-4">
+              Enter 2FA Code
+            </p>
+            <div className="mt-2 bg-white rounded-xl border-[#ABABAB57] border p-4">
               <input
                 autoFocus
-                className="outline-none bg-transparent flex-1 min-w-[150px] text-[11px] lg:text-[20px] placeholder:text-gray-300"
-                placeholder={
-                  seedsValue.length === 0 ? "Paste seeds or type here..." : ""
-                }
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
+                type="text"
+                maxLength={6}
+                className="w-full outline-none bg-transparent text-center text-2xl lg:text-4xl tracking-[0.5em] placeholder:text-gray-300"
+                placeholder="000000"
+                value={otpValue}
+                onChange={(e) => setOtpValue(e.target.value.replace(/\D/g, ""))}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
               />
-            )}
+            </div>
+            <p className="text-[#00000080] text-xs md:text-sm mt-4 text-center">
+              Enter the 6-digit code from your authenticator app
+            </p>
           </div>
-        </div>
-
-        <div className="flex flex-wrap gap-2 px-4 md:px-8 mt-3 h-8">
-          {suggestions.map((suggestion, index) => (
-            <button
-              key={index}
-              onClick={() => addSeed(suggestion)}
-              className="px-3 py-1 bg-[#36F1] text-[#36F] rounded-full text-xs lg:text-sm hover:bg-[#36F2] transition-colors"
-            >
-              {suggestion}
-            </button>
-          ))}
-        </div>
-
-        <p className="xxs:flex gap-2 xs:gap-4 text-[14px] lg:text-xl px-7 mt-7">
-          Don't have account yet?
-          <span
-            onClick={() => openModal("createAccount")}
-            className="cursor-pointer lg:underline text-[#36F] lg:text-black font-medium"
-          >
-            Register here
-          </span>
-        </p>
+        )}
 
         <div className="flex justify-center mt-4">
           <Button
-            disabled={seedsValue.length !== 16 || isLoading}
+            disabled={(!requires2FA && seedsValue.length !== 16) || (requires2FA && otpValue.length !== 6) || isLoading}
             onClick={handleSubmit}
-            text={isLoading ? "Logging in..." : "Login"}
+            text={isLoading ? (requires2FA ? "Verifying..." : "Logging in...") : (requires2FA ? "Verify OTP" : "Login")}
             className="text-[12px] md:text-[19px]! px-18 md:px-30 py-1.5 md:py-4! mt-7"
           />
         </div>
