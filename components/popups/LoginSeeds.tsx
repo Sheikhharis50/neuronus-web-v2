@@ -29,8 +29,6 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
   const [seedsValue, setSeedsValue] = useState<string[]>([]);
   const [otpValue, setOtpValue] = useState("");
 
-  console.log("LoginSeeds State:", { requires2FA, isLoading, error });
-
   // --- Handlers ---
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
