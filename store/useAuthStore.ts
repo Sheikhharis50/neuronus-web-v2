@@ -94,7 +94,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         throw new Error("Token not saved correctly");
       }
     } catch (err: any) {
-      console.error("Login Error Response:", err.response?.data);
       const is2FARequired = 
         err.response?.status === 400 && 
         (err.response?.data?.totp_token || 

@@ -21,7 +21,7 @@ export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-console.log(isAuthenticated)
+
   useEffect(() => {
     const shouldOpenLogin = searchParams.get("openLogin") === "true";
     const callback = searchParams.get("callback");

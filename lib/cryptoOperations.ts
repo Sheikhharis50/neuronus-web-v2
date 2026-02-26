@@ -1,6 +1,5 @@
 // src/utils/cryptoOperations.ts
 import Words from '../data/constants/Seeds';
-import * as openpgp from 'openpgp';
 
 // Types
 interface EncryptedPrivateKey {
@@ -67,6 +66,21 @@ export async function generateSeedPhrase(): Promise<string> {
   return seedWords.join(' ');
 }
 
+async function getOpenPGP() {
+  if (typeof window !== 'undefined' && (window as any).openpgp) {
+    return (window as any).openpgp;
+  }
+  
+  // Dynamically load the minified script if not present
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/openpgp@5.11.0/dist/openpgp.min.js';
+    script.onload = () => resolve((window as any).openpgp);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
 // 2. Derive Seeds Hash
 export async function deriveSeedsHash(seedPhrase: string): Promise<{ loginHash: string }> {
   const encoder = new TextEncoder();
@@ -125,6 +139,7 @@ export async function deriveEncryptionKey(
 
 // 4. Generate PGP Key Pair (REAL PGP - Production Ready)
 export async function generateKeyPair(): Promise<PGPKeyPair> {
+  const openpgp = await getOpenPGP();
   const { privateKey, publicKey } = await openpgp.generateKey({
     type: 'rsa',
     rsaBits: 2048,
@@ -192,6 +207,7 @@ export async function encryptUserData(
   userData: string, 
   publicKeyArmored: string
 ): Promise<string> {
+  const openpgp = await getOpenPGP();
   const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
 
   const encrypted = await openpgp.encrypt({
@@ -208,7 +224,6 @@ export async function storeEncryptionKey(key: string): Promise<{ success: boolea
     localStorage.setItem('encryption-key', key);
     return { success: true };
   } catch (error) {
-    console.error('Seed storage error:', error);
     throw new Error('Failed to store seed phrase');
   }
 }
@@ -296,7 +311,6 @@ export async function handleSuccessfulLogin(
         userCryptoData,
       };
     } catch (decryptError) {
-      console.warn('Could not decrypt private key now, but login successful');
       return {
         success: true,
         userCryptoData,
@@ -336,6 +350,7 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
 }
 
 export async function encryptAnyData(data: string | object): Promise<string> {
+  const openpgp = await getOpenPGP();
   try {
     const cryptoData = localStorage.getItem("crypto_data");
     if (!cryptoData) {
@@ -379,6 +394,7 @@ export async function encryptAnyData(data: string | object): Promise<string> {
 }
 
 export async function decryptAnyData(encryptedDataArmored: string): Promise<string | object> {
+  const openpgp = await getOpenPGP();
   try {
     if (!encryptedDataArmored) {
       throw new Error("No encrypted data provided.");
