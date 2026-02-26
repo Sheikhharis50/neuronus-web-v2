@@ -10,7 +10,7 @@ import BottomEllipse from "@/public/images/BottomEllipse";
 interface HeaderProps {
   title: React.ReactNode;
   subTitle?: { text: string; icon?: React.ElementType };
-  description: string;
+  description: string | React.ReactNode;
   children?: React.ReactNode;
   classes?: {
     container?: string;
