@@ -103,8 +103,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
         set({ requires2FA: true, tempSeeds: seeds, isLoading: false });
         return false;
       }
-      const message = err.response?.data?.message || err.response?.data?.[0] || err.response?.data?.non_field_errors?.[0] || "Login failed";
+      console.log(err.response)
+      const message = err.response?.data?.detail || err.response?.data?.non_field_errors?.[0] || "Login failed";
       set({ error: message, isLoading: false });
+      toast.error(message);
       return false;
     }
   },

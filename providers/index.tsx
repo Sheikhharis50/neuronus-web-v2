@@ -10,7 +10,7 @@ import { SelectRegistration } from "@/components/popups/SelectReagistration";
 import { SettingsPopup } from "@/components/popups/SettingsPopup";
 import { useSearchParams } from "next/navigation";
 
-export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
+const AppContextsInner = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
   const activeModal = useAuthStore((state) => state.activeModal);
   const closeModal = useAuthStore((state) => state.closeModal);
@@ -35,7 +35,7 @@ export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
   }, [searchParams, isAuthenticated, openModal]);
 
   return (
-    <Suspense>
+    <>
       <SidebarProvider>{children}</SidebarProvider>
 
       {activeModal === "createAccount" && (
@@ -56,6 +56,14 @@ export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
       {activeModal === "settings" && (
         <SettingsPopup isOpen={true} onClose={closeModal} />
       )}
+    </>
+  );
+};
+
+export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
+  return (
+    <Suspense fallback={null}>
+      <AppContextsInner>{children}</AppContextsInner>
     </Suspense>
   );
 };
