@@ -5,10 +5,10 @@
 </head>
 <body>
     <script>
-        const TRUSTED_ORIGINS = ["https://neurorsa.xyz/", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
+        const TRUSTED_ORIGINS = ["https://neurorsa.xyz/", "http://localhost:5173", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
 
     window.addEventListener("message", async (event) => {
-    const ALLOWED_ORIGINS = ["https://neurorsa.xyz/", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
+    const ALLOWED_ORIGINS = ["https://neurorsa.xyz/", "http://localhost:5173", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
     if (!ALLOWED_ORIGINS.includes(event.origin)) return;
     const appLockKey = `lock_${event.origin}`;
 
