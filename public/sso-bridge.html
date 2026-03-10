@@ -5,11 +5,27 @@
 </head>
 <body>
     <script>
-        const TRUSTED_ORIGINS = ["https://neurorsa.xyz/", "http://localhost:5173", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
+        try {
+        const testAccess = localStorage.getItem("access_token");
+    } catch (e) {
+        window.parent.postMessage({ 
+            type: "AUTH_DATA_RESPONSE", 
+            payload: { status: "STORAGE_BLOCKED" } 
+        }, "*");
+    }
+    const normalizeOrigin = (origin) => origin.replace(/\/$/, "");
+    const TRUSTED_ORIGINS = [
+    "http://localhost:5174",
+    "http://localhost:5173",
+    "https://neurorsa.xyz",
+    "https://neuropassword.com",
+    "https://storage.neurodrive.me",
+    "https://mailing.neuromail.cloud",
+    ].map(normalizeOrigin);
 
     window.addEventListener("message", async (event) => {
-    const ALLOWED_ORIGINS = ["https://neurorsa.xyz/", "http://localhost:5173", "https://neuropassword.com/", "https://storage.neurodrive.me/", "https://mailing.neuromail.cloud/"];
-    if (!ALLOWED_ORIGINS.includes(event.origin)) return;
+    const incomingOrigin = normalizeOrigin(event.origin);
+    if (!TRUSTED_ORIGINS.includes(incomingOrigin)) return;
     const appLockKey = `lock_${event.origin}`;
 
     if (event.data.type === "REQUEST_AUTH_DATA") {
