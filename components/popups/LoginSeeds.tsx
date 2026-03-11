@@ -83,7 +83,7 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
       const success = await loginWithOTP(otpValue);
       if (success) {
         toast.success("Logged In Successfully.");
-        onClose();
+        openModal("registeredTools")
       }
       return;
     }
@@ -95,7 +95,7 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
 
     if (success) {
       toast.success("Logged In Successfully.");
-      onClose(); // Close modal
+      openModal("registeredTools")
     } else {
       // If not 2FA, the store error might be set. We can show it here if needed.
       // But requires2FA should trigger a re-render.

@@ -19,15 +19,16 @@ const Services = [{ name: "Help" }, { name: "Privacy" }, { name: "Terms" }];
 
 export const SeedsRegistration = ({ isOpen, onClose }: Props) => {
   const openModal = useAuthStore((state) => state.openModal);
+  const activeModal = useAuthStore((state) => state.activeModal);
 
   const { seedsData, isGeneratingSeeds, error, handleRegister } =
     useAuthStore();
-
+    
   useEffect(() => {
-    if (!seedsData && !isGeneratingSeeds) {
+    if (!isGeneratingSeeds && activeModal === "seedsRegister") {
       handleRegister();
     }
-  }, [handleRegister, seedsData]);
+  }, [handleRegister, activeModal]);
 
   const handleCopy = async () => {
     if (!seedsData) return;
@@ -111,7 +112,7 @@ export const SeedsRegistration = ({ isOpen, onClose }: Props) => {
             <button
               onClick={handleCopy}
               disabled={!seedsData || isGeneratingSeeds}
-              className="flex items-center gap-2 hover:opacity-70 transition-opacity disabled:opacity-30"
+              className="flex items-center cursor-pointer gap-2 hover:opacity-70 transition-opacity disabled:opacity-30"
             >
               <Copy />
               Copy
