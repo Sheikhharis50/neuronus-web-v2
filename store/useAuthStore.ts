@@ -4,7 +4,7 @@ import { authService } from '@/services/auth-service';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 
-type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | 'settings' | null;
+type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | 'settings' | null | 'registeredTools';
 
 interface AuthState {
   seedsData: any | null;
@@ -24,6 +24,7 @@ interface AuthState {
   resetRegState: () => void;
   loginWithSeeds: (seeds: string) => Promise<boolean>;
   loginWithOTP: (otp: string) => Promise<boolean>;
+  globalLogout: () => void;
 }
 
 const isTokenExpired = (token: string) => {
@@ -86,7 +87,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const response = await authService.generateToken(payload);
       await handleSuccessfulLogin(response, seeds);
       const token = localStorage.getItem("access_token");
-    
+      const bc = new BroadcastChannel("auth_sync");
+      bc.postMessage({ type: "SESSION_UPDATED" });
       if (token) {
         set({ isAuthenticated: true, isLoading: false, error: null });
         return true;
@@ -156,5 +158,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     } else {
       set({ isAuthenticated: true });
     }
+  },
+
+  globalLogout: async () => {
+    localStorage.clear();
+    set({ isAuthenticated: false });
+    set({ activeModal: null, requires2FA: false, tempSeeds: null })
+    const bc = new BroadcastChannel("auth_sync");
+    bc.postMessage({ type: "SESSION_TERMINATED" });
   },
 }));

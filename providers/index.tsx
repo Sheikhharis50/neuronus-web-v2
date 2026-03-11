@@ -9,6 +9,7 @@ import { SeedsRegistration } from "@/components/popups/SeedsRegistration";
 import { SelectRegistration } from "@/components/popups/SelectReagistration";
 import { SettingsPopup } from "@/components/popups/SettingsPopup";
 import { useSearchParams } from "next/navigation";
+import RegisteredToolsPopup from "@/components/popups/RegisteredToolsPopup";
 
 const AppContextsInner = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
@@ -30,7 +31,11 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
       openModal("loginSeeds");
     }
     if (isAuthenticated && callback) {
-      window.location.href = callback;
+      const token = localStorage.getItem("access_token");
+      const cryptoData = localStorage.getItem("crypto_data") || "";
+      const encKey = localStorage.getItem("encryption-key") || "";
+
+      window.location.href = `${callback}#access_token=${token}&crypto_data=${encodeURIComponent(cryptoData)}&encryption_key=${encodeURIComponent(encKey)}`;
     }
   }, [searchParams, isAuthenticated, openModal]);
 
@@ -55,6 +60,9 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
       )}
       {activeModal === "settings" && (
         <SettingsPopup isOpen={true} onClose={closeModal} />
+      )}
+      {activeModal === "registeredTools" && (
+        <RegisteredToolsPopup isOpen={true} onClose={closeModal} />
       )}
     </>
   );
