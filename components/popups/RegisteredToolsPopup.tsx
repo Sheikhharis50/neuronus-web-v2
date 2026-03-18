@@ -32,7 +32,7 @@ const openAppWithSSO = (appUrl: string) => {
   const cryptoData  = localStorage.getItem("crypto_data") || "";
   const encKey      = localStorage.getItem("encryption-key") || "";
 
-  if (!token) {
+  if (!token || appUrl === "https://ghosttransfer.tech") {
     // No token — just open the app, it will handle its own auth
     window.open(appUrl, "_blank");
     return;

@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, Suspense, useEffect } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import { SidebarProvider } from "./SidebarProvider";
 import { CreateAccountPopup } from "@/components/popups/CreateAccount";
 import { LoginSeeds } from "@/components/popups/LoginSeeds";
@@ -18,6 +18,7 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
   const openModal = useAuthStore((state) => state.openModal);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const checkAuth = useAuthStore((state) => state.checkAuth);
+  const [showTools, setShowTools] = useState(false);
 
   useEffect(() => {
     checkAuth();
@@ -50,7 +51,7 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
         <FreeAccount isOpen={true} onClose={closeModal} />
       )}
       {activeModal === "loginSeeds" && (
-        <LoginSeeds isOpen={true} onClose={closeModal} />
+        <LoginSeeds isOpen={true} onClose={closeModal}  openTools={()=>setShowTools(true)} />
       )}
       {activeModal === "seedsRegister" && (
         <SeedsRegistration isOpen={true} onClose={closeModal} />
@@ -61,8 +62,8 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
       {activeModal === "settings" && (
         <SettingsPopup isOpen={true} onClose={closeModal} />
       )}
-      {activeModal === "registeredTools" && (
-        <RegisteredToolsPopup isOpen={true} onClose={closeModal} />
+      {showTools && (
+        <RegisteredToolsPopup isOpen={showTools} onClose={()=>setShowTools(false)} />
       )}
     </>
   );

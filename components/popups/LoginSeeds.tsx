@@ -11,18 +11,19 @@ import Words from "@/data/constants/Seeds";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  openTools: () => void;
 }
 
 const Services = [{ name: "Help" }, { name: "Privacy" }, { name: "Terms" }];
 
-export const LoginSeeds = ({ isOpen, onClose }: Props) => {
+export const LoginSeeds = ({ isOpen, onClose, openTools }: Props) => {
   const loginWithSeeds = useAuthStore((state) => state.loginWithSeeds);
   const loginWithOTP = useAuthStore((state) => state.loginWithOTP);
   const isLoading = useAuthStore((state) => state.isLoading);
   const requires2FA = useAuthStore((state) => state.requires2FA);
   const openModal = useAuthStore((state) => state.openModal);
   const error = useAuthStore((state) => state.error);
-
+console.log(isLoading)
   // Input States
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -83,7 +84,7 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
       const success = await loginWithOTP(otpValue);
       if (success) {
         toast.success("Logged In Successfully.");
-        openModal("registeredTools")
+        openTools()
       }
       return;
     }
@@ -95,7 +96,8 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
 
     if (success) {
       toast.success("Logged In Successfully.");
-      openModal("registeredTools")
+      onClose()
+      openTools()
     } else {
       // If not 2FA, the store error might be set. We can show it here if needed.
       // But requires2FA should trigger a re-render.
@@ -211,7 +213,7 @@ export const LoginSeeds = ({ isOpen, onClose }: Props) => {
             onClick={handleSubmit}
             text={isLoading ? (requires2FA ? "Verifying" : "Logging in") : (requires2FA ? "Verify OTP" : "Login")}
             className="text-[12px] md:text-[19px]! flex justify-center items-center gap-2 px-18 md:px-30 py-1.5 md:py-4! mt-7"
-            isLoading={isLoading || requires2FA}
+            isLoading={isLoading}
           />
 
         </div>
