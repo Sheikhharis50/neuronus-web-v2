@@ -4,7 +4,7 @@ import { authService } from '@/services/auth-service';
 import { toast } from 'react-toastify';
 import { create } from 'zustand';
 
-type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | 'settings' | null | 'registeredTools';
+type ModalType = 'loginSeeds' | 'seedsRegister' | 'selectRegistration' | 'createAccount' | 'freeAccount' | 'settings' | null | 'registeredTools' | 'accountPopup' ;
 
 interface AuthState {
   seedsData: any | null;
@@ -132,8 +132,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ isAuthenticated: true, isLoading: false, requires2FA: false, tempSeeds: null });
       return true;
     } catch (err: any) {
-      const message = err.response?.data?.message || err.response?.data?.[0] || "Invalid code";
+      console.log(err.response)
+      const message = err.response?.data?.detail || err.response?.data?.[0] || "Invalid code";
       set({ error: message, isLoading: false });
+      toast.error(message)
       return false;
     }
   },
@@ -166,5 +168,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ activeModal: null, requires2FA: false, tempSeeds: null })
     const bc = new BroadcastChannel("auth_sync");
     bc.postMessage({ type: "SESSION_TERMINATED" });
+    bc.close();
   },
 }));
