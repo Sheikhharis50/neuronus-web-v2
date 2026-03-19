@@ -5,12 +5,12 @@ import Button from "../Button";
 
 
 const APP_URLS: Record<string, string> = {
-  "Neuro Mail":      "https://mailing.neuromail.cloud",
-  "Resonance":       "", 
-  "NeuroRSA":        "https://neurorsa.xyz",
-  "NeuroDrive":      "https://storage.neurodrive.me",
-  "NeuroPassword":   "https://neuropassword.com",
-  "GhostTransfer":   "https://ghosttransfer.tech", 
+  "Neuro Mail":    "https://mail.neuronus.net",
+  "Resonance":     "",
+  "NeuroRSA":      "https://neurorsa.neuronus.net",
+  "NeuroDrive":    "https://drive.neuronus.net",
+  "NeuroPassword": "https://passwordmanager.neuronus.net",
+  "GhostTransfer": "https://ghosttransfer.neuronus.net",
 };
 
 const tools = [
@@ -22,25 +22,9 @@ const tools = [
   { name: "GhostTransfer",  icon: "/images/transfer.svg" },
 ];
 
-// ── SSO Redirect ──────────────────────────────────────────────
-// Reads token from neuronus.net localStorage and appends it
-// to the target app URL as a fragment (#access_token=...)
-// Target app's AuthContext reads the fragment on mount and
-// saves it to its own localStorage — user is instantly logged in
 const openAppWithSSO = (appUrl: string) => {
-  const token       = localStorage.getItem("access_token");
-  const cryptoData  = localStorage.getItem("crypto_data") || "";
-  const encKey      = localStorage.getItem("encryption-key") || "";
-
-  if (!token || appUrl === "https://ghosttransfer.tech") {
-    // No token — just open the app, it will handle its own auth
-    window.open(appUrl, "_blank");
-    return;
-  }
-
-  // Append token in URL fragment (not query param — fragment never sent to server)
-  const url = `${appUrl}#access_token=${token}&crypto_data=${encodeURIComponent(cryptoData)}&encryption_key=${encodeURIComponent(encKey)}`;
-  window.open(url, "_blank");
+  if (!appUrl) return;
+  window.open(appUrl, "_blank");
 };
 
 export default function RegisteredToolsPopup({
