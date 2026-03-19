@@ -7,28 +7,16 @@ import Button from "../Button";
 
 const openAppWithSSO = (appUrl: string) => {
   if (!appUrl) return;
-  const token      = localStorage.getItem("access_token");
-  const cryptoData = localStorage.getItem("crypto_data") || "";
-  const encKey     = localStorage.getItem("encryption-key") || "";
-
-  if (!token || appUrl === "https://ghosttransfer.tech") {
-    window.open(appUrl, "_blank");
-    return;
-  }
-
-  window.open(
-    `${appUrl}#access_token=${token}&crypto_data=${encodeURIComponent(cryptoData)}&encryption_key=${encodeURIComponent(encKey)}`,
-    "_blank",
-  );
+  window.open(appUrl, "_blank");
 };
 
 const APP_URLS: Record<string, string> = {
-  "Neuro Mail":    "https://mailing.neuromail.cloud",
+  "Neuro Mail":    "https://mail.neuronus.net",
   "Resonance":     "",
-  "NeuroRSA":      "https://neurorsa.xyz",
-  "NeuroDrive":    "https://storage.neurodrive.me",
-  "NeuroPassword": "https://neuropassword.com",
-  "GhostTransfer": "https://ghosttransfer.tech",
+  "NeuroRSA":      "https://neurorsa.neuronus.net",
+  "NeuroDrive":    "https://drive.neuronus.net",
+  "NeuroPassword": "https://passwordmanager.neuronus.net",
+  "GhostTransfer": "https://ghosttransfer.neuronus.net",
 };
 
 const tools = [

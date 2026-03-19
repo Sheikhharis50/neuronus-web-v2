@@ -10,12 +10,12 @@ import { useAuthStore } from "@/store/useAuthStore";
 
 // ── App URLs for Tools tab ──
 const APP_URLS: Record<string, string> = {
-  "Neuro Mail": "https://mailing.neuromail.cloud",
-  Resonance: "",
-  NeuroRSA: "https://neurorsa.xyz",
-  NeuroDrive: "https://storage.neurodrive.me",
-  NeuroPassword: "https://neuropassword.com",
-  GhostTransfer: "https://ghosttransfer.tech",
+  "Neuro Mail":    "https://mail.neuronus.net",
+  "Resonance":     "",
+  "NeuroRSA":      "https://neurorsa.neuronus.net",
+  "NeuroDrive":    "https://drive.neuronus.net",
+  "NeuroPassword": "https://passwordmanager.neuronus.net",
+  "GhostTransfer": "https://ghosttransfer.neuronus.net",
 };
 
 const tools = [
@@ -28,19 +28,8 @@ const tools = [
 ];
 
 const openAppWithSSO = (appUrl: string) => {
-  const token = localStorage.getItem("access_token");
-  const cryptoData = localStorage.getItem("crypto_data") || "";
-  const encKey = localStorage.getItem("encryption-key") || "";
-
-  if (!token || appUrl === "https://ghosttransfer.tech") {
-    window.open(appUrl, "_blank");
-    return;
-  }
-
-  window.open(
-    `${appUrl}#access_token=${token}&crypto_data=${encodeURIComponent(cryptoData)}&encryption_key=${encodeURIComponent(encKey)}`,
-    "_blank",
-  );
+  if (!appUrl) return;
+  window.open(appUrl, "_blank");
 };
 
 // ── Icons ──
