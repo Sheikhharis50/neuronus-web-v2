@@ -23,7 +23,6 @@ export const LoginSeeds = ({ isOpen, onClose, openTools }: Props) => {
   const requires2FA = useAuthStore((state) => state.requires2FA);
   const openModal = useAuthStore((state) => state.openModal);
   const error = useAuthStore((state) => state.error);
-console.log(isLoading)
   // Input States
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -84,7 +83,8 @@ console.log(isLoading)
       const success = await loginWithOTP(otpValue);
       if (success) {
         toast.success("Logged In Successfully.");
-        openTools()
+        onClose();
+        openTools();
       }
       return;
     }
@@ -96,12 +96,15 @@ console.log(isLoading)
 
     if (success) {
       toast.success("Logged In Successfully.");
-      onClose()
-      openTools()
+      onClose();
+      openTools();
     } else {
       // If not 2FA, the store error might be set. We can show it here if needed.
       // But requires2FA should trigger a re-render.
-      console.log("Login failed, requires2FA is:", useAuthStore.getState().requires2FA);
+      console.log(
+        "Login failed, requires2FA is:",
+        useAuthStore.getState().requires2FA,
+      );
     }
   };
 
@@ -152,7 +155,9 @@ console.log(isLoading)
                     autoFocus
                     className="outline-none bg-transparent flex-1 min-w-[150px] text-[11px] lg:text-[20px] placeholder:text-gray-300"
                     placeholder={
-                      seedsValue.length === 0 ? "Paste seeds or type here..." : ""
+                      seedsValue.length === 0
+                        ? "Paste seeds or type here..."
+                        : ""
                     }
                     value={inputValue}
                     onChange={handleInputChange}
@@ -209,13 +214,24 @@ console.log(isLoading)
 
         <div className="flex justify-center mt-4">
           <Button
-            disabled={(!requires2FA && seedsValue.length !== 16) || (requires2FA && otpValue.length !== 6) || isLoading}
+            disabled={
+              (!requires2FA && seedsValue.length !== 16) ||
+              (requires2FA && otpValue.length !== 6) ||
+              isLoading
+            }
             onClick={handleSubmit}
-            text={isLoading ? (requires2FA ? "Verifying" : "Logging in") : (requires2FA ? "Verify OTP" : "Login")}
+            text={
+              isLoading
+                ? requires2FA
+                  ? "Verifying"
+                  : "Logging in"
+                : requires2FA
+                  ? "Verify OTP"
+                  : "Login"
+            }
             className="text-[12px] md:text-[19px]! flex justify-center items-center gap-2 px-18 md:px-30 py-1.5 md:py-4! mt-7"
             isLoading={isLoading}
           />
-
         </div>
 
         <div className="flex justify-center gap-5 xs:gap-10 mb-4 mt-6">
