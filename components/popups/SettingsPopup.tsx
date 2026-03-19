@@ -233,7 +233,6 @@ export const SettingsPopup = ({ isOpen, onClose }: Props) => {
       setIs2faEnabled(stored === "true");
     }
   }, [isOpen]);
-  console.log("is2faEnabled", is2faEnabled);
   const handleStartTotpSetup = async () => {
     setIsLoading(true);
     try {
