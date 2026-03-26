@@ -6,6 +6,26 @@ import SignupFlow from "./SignupFlow";
 import { useState } from "react";
 import Container from "@/components/Container";
 import TabSwitcher from "@/components/TabSwitcher";
+import { CryptoProvider, useCrypto } from "../../../context/CryptoContext";
+
+function DemoInner() {
+  const { activeTab, setActiveTab } = useCrypto();
+
+  return (
+    <div className=" min-h-screen py-8">
+      <TabSwitcher
+        options={[
+          { label: "Signup Flow", value: "signup" },
+          { label: "Encrypt Message", value: "encrypt" },
+        ]}
+        value={activeTab}
+        onChange={(v) => setActiveTab(v as "signup" | "encrypt")}
+        className="mx-auto mb-5"
+      />
+      {activeTab === "signup" ? <SignupFlow /> : <EncryptMessage />}
+    </div>
+  );
+}
 
 const Encryption = () => {
   const [activeTab, setActiveTab] = useState("signup");
@@ -20,17 +40,9 @@ const Encryption = () => {
         className="text-black text-center w-[95%] sm:w-[90%] lg:w-1/2 mx-auto"
       />
 
-      <TabSwitcher
-        options={[
-          { label: "Signup Flow", value: "signup" },
-          { label: "Encrypt Message", value: "encrypt" },
-        ]}
-        value={activeTab}
-        onChange={setActiveTab}
-        className="mx-auto mb-5"
-      />
-
-      {activeTab === "signup" ? <SignupFlow /> : <EncryptMessage />}
+      <CryptoProvider>
+        <DemoInner />
+      </CryptoProvider>
     </Container>
   );
 };
