@@ -1,59 +1,115 @@
-import CardDescription from "./CardDescription";
-import CardHeading from "./CardHeading";
-import CardTitle from "./CardTitle";
-import Pill from "./Pill";
+"use client";
+
+import { StepState } from "../../../context/CryptoContext";
 
 interface ActivityLogProps {
+  steps: StepState[];
   title: string;
-  data: { title: string; pill: string; description: string; logs: string[] }[];
 }
 
-const ActivityLog = ({ data, title }: ActivityLogProps) => {
+const statusColors = {
+  completed: {
+    card: "bg-green-50 border-green-200",
+    badge: "bg-green-100 text-green-800",
+    dot: "bg-green-500 text-white",
+  },
+  active: {
+    card: "bg-blue-50 border-blue-200",
+    badge: "bg-blue-100 text-blue-800",
+    dot: "bg-blue-500 text-white",
+  },
+  error: {
+    card: "bg-red-50 border-red-200",
+    badge: "bg-red-100 text-red-800",
+    dot: "bg-red-500 text-white",
+  },
+  pending: {
+    card: "bg-gray-50 border-gray-200",
+    badge: "bg-gray-100 text-gray-600",
+    dot: "bg-gray-300 text-gray-600",
+  },
+};
+
+const ActivityLog = ({ steps, title }: ActivityLogProps) => {
   return (
-    <div className="bg-white rounded-[9.71px] space-y-3 lg:space-y-5">
-      <CardTitle
-        text="Activity Log"
-        className="px-3 lg:px-5 2xl:px-7 pt-3 lg:pt-5 2xl:pt-7"
-      />
+    <div className="bg-white border border-gray-200 rounded-xl shadow-lg flex flex-col">
+      <div className="p-4 border-b border-gray-200">
+        <h4 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
+          Activity Log
+        </h4>
+      </div>
 
-      <hr className="border-[#BDBDBD]" />
-
-      <div className="px-3 lg:px-5 2xl:px-7 pb-3 lg:pb-5 lg:space-y-5 space-y-3">
-        {data.map((item, i) => (
-          <div
-            className="bg-slate/55 border border-[#D8D8D8] rounded-[6.5px] py-3 xl:py-4 pl-3 lg:pl-4 2xl:pl-6 pe-1.5 lg:pe-2 2xl:pe-2.5"
-            key={`${title}-${item.title}-${i}`}
-          >
-            <p className="bg-[#D2D5DB] size-6.5 lg:size-7.5 2xl:size-8.25 rounded-full flex items-center justify-center font-semibold text-sm lg:text-base 2xl:text-lg mb-3 2xl:mb-5">
-              {i + 1}
-            </p>
-            <div className="flex items-center justify-between mb-1">
-              <CardHeading text={item.title} />
-              <Pill text={item.pill} />
-            </div>
-            <CardDescription
-              sm
-              text={item.description}
-              className="mb-1.5 lg:mb-2 2xl:mb-2.5"
-            />
-
-            <div className="flex flex-col gap-2 lg:gap-2.75 2xl:gap-3.25 mb-1.5 2xl:mb-3">
-              {item.logs.map((log, index) => (
+      <div className="px-3 py-3 space-y-4 overflow-y-auto flex-1">
+        {steps.map((step, index) => {
+          const colors = statusColors[step.status];
+          return (
+            <div
+              key={step.id}
+              className={`p-4 rounded-lg border-2 ${colors.card} transition-all duration-300`}
+            >
+              {/* Step header */}
+              <div className="flex items-center gap-3 mb-3">
                 <div
-                  key={`${title}-activity-logs-${log}-${index}`}
-                  className="flex items-center gap-2 2xl:gap-3"
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${colors.dot}`}
                 >
-                  <div className="size-4 lg:size-5 2xl:size-6 rounded-full bg-[#E6E7EB]" />
-                  <CardDescription
-                    sm
-                    text={log}
-                    className="2xl:w-[80%] flex-1"
-                  />
+                  {index + 1}
                 </div>
-              ))}
+                <div className="flex-1">
+                  <h5 className="font-semibold text-gray-800 text-sm">
+                    {step.title}
+                  </h5>
+                  <p className="text-xs text-gray-600">{step.description}</p>
+                </div>
+                <span
+                  className={`px-2 py-1 rounded text-xs font-medium ${colors.badge}`}
+                >
+                  {step.status.charAt(0).toUpperCase() + step.status.slice(1)}
+                </span>
+              </div>
+
+              {/* Substeps */}
+              <div className="ml-11 space-y-2">
+                {step.substeps.map((substep, subIdx) => {
+                  const isActive =
+                    step.status === "active" || step.status === "completed";
+
+                  return (
+                    <div
+                      key={subIdx}
+                      className="flex items-center gap-2 text-sm"
+                    >
+                      {isActive ? (
+                        substep.completed ? (
+                          // Completed tick
+                          <div className="relative w-5 h-5 flex-shrink-0">
+                            <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                              <span className="text-white text-[10px] font-bold">
+                                ✓
+                              </span>
+                            </div>
+                          </div>
+                        ) : (
+                          // Spinning loader
+                          <div className="w-5 h-5 flex-shrink-0 border-[3px] border-gray-300 border-t-blue-500 rounded-full animate-spin" />
+                        )
+                      ) : (
+                        // Pending empty dot
+                        <div className="w-5 h-5 flex-shrink-0 rounded-full bg-gray-200" />
+                      )}
+                      <span
+                        className={`text-xs ${
+                          substep.completed ? "text-green-700" : "text-gray-500"
+                        }`}
+                      >
+                        {substep.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
