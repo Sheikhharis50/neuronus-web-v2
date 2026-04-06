@@ -30,7 +30,7 @@ const Blog = () => {
         <Container>
           <BlogHeader
             heading="Blogs"
-            breadcrumbs={[{ name: "Home", url: "/" }, { name: "Blog" }]}
+            breadcrumbs={[{ name: "Home", url: "/" }, { name: "Blogs" }]}
           />
         </Container>
         <Container className="grid lg:grid-cols-2 md:grid-cols-1 md:gap-8 gap-5">
