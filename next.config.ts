@@ -6,6 +6,25 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "neuronus-api-ud3z5.ondigitalcean.app",
+      },
+      {
+        protocol: "https",
+        hostname: "neuronus.fra1.digitaloceanspaces.com",
+      },
+      {
+        protocol: "https",
+        hostname: "neuronus.fra1.cdn.digitaloceanspaces.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+      },
+    ],
   },
   compress: true,
   reactStrictMode: true,
