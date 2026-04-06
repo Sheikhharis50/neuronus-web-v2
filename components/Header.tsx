@@ -76,7 +76,7 @@ const Header = ({
               </h3>
             )}
 
-            <h1 className="text-[32px] sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-center mb-4 md:mb-6 xl:mb-10 gradient-text">
+            <h1 className="text-[32px] sm:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl text-center mb-4 md:mb-6 xl:mb-10 gradient-text leading-tight">
               {title}
             </h1>
             <p
