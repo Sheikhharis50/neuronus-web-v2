@@ -1,3 +1,5 @@
+"use server";
+
 import { API_URL, API_TOKEN } from "@/config/api";
 import { FILE_CDN_URL } from "@/config/file";
 
