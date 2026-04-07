@@ -1,3 +1,4 @@
+"use client"
 import Previous from "@/public/icons/Previous";
 import Button from "./Button";
 import Description from "./Description";
@@ -8,6 +9,7 @@ interface ProductCatalogProps extends ProductCatalogType {
     root?: string;
     iconWrapper?: string;
     title?: string;
+    link?: string;
     description?: string;
   };
 }
@@ -16,6 +18,7 @@ const ProductCatalog = ({
   description,
   productIcon,
   title,
+  link,
   classes = {},
 }: ProductCatalogProps) => {
   const {
@@ -46,9 +49,10 @@ const ProductCatalog = ({
         </p>
 
         <div className="flex items-center gap-3 sm:gap-4">
-          <Button
+           <Button
             text="Try Now"
             className="text-sm! sm:text-base! 2xl:text-lg! w-22 xs:w-26 sm:w-32 2xl:w-39.25 py-3! xl:py-4!"
+            onClick={() => window.open(link, "_blank")}  // ← add this
           />
           <p className="text-xs xs:text-sm sm:text-base 2xl:text-lg">
             Explore {title}

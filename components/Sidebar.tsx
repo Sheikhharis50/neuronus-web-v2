@@ -6,11 +6,13 @@ import NavLinks from "./navbar/NavLinks";
 import Button from "./Button";
 import { useSidebar } from "@/hooks/useSidebar";
 import { useRef } from "react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const Sidebar = () => {
   const { isSidebarVisible, hideSidebar } = useSidebar();
   const sidebarRef = useRef<HTMLDivElement>(null);
-
+  const openModal = useAuthStore((state) => state.openModal);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const handleClose = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
       hideSidebar();
@@ -41,13 +43,21 @@ const Sidebar = () => {
           </div>
           <NavLinks sidebar />
         </div>
-        <div className="flex flex-col gap-5 items-start">
-          <button>Sign in</button>
-          <Button
-            className={`text-sm! 2xl:text-[15px]!`}
-            text="Create a free account"
-          />
-        </div>
+        {!isAuthenticated && (
+          <div className="flex flex-col gap-5 items-start">
+            <button
+              className="cursor-pointer"
+              onClick={() => openModal("loginSeeds")}
+            >
+              Sign in
+            </button>
+            <Button
+              onClick={() => openModal("selectRegistration")}
+              className={`text-sm! 2xl:text-[15px]!`}
+              text="Create a free account"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

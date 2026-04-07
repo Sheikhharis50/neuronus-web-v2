@@ -1,0 +1,4 @@
+{"sessionId":"4d1b6c","location":"api-client.ts:interceptor","message":"Token source check","data":{"hasAuthStorage":false,"hasAccessToken":true,"hasLocalStorage":true,"url":"auth/totp/generate/"},"timestamp":1771698297916,"hypothesisId":"H1"}
+{"sessionId":"4d1b6c","location":"api-client.ts:interceptor","message":"After set header","data":{"authorizationSet":true,"url":"auth/totp/generate/"},"timestamp":1771698297916,"hypothesisId":"H3"}
+{"sessionId":"4d1b6c","location":"api-client.ts:interceptor","message":"Token source check","data":{"hasAuthStorage":false,"hasAccessToken":true,"hasLocalStorage":true,"url":"auth/totp/generate/"},"timestamp":1771698308683,"hypothesisId":"H1"}
+{"sessionId":"4d1b6c","location":"api-client.ts:interceptor","message":"After set header","data":{"authorizationSet":true,"url":"auth/totp/generate/"},"timestamp":1771698308683,"hypothesisId":"H3"}

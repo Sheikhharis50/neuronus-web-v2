@@ -1,3 +1,4 @@
+"use client";
 import Header from "@/components/Header";
 import Description from "@/components/Description";
 import Button from "@/components/Button";

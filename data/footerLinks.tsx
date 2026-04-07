@@ -20,14 +20,14 @@ const company = [
 ];
 
 const communication = [
-  { name: "Neuro Mail", url: "" },
-  { name: "Resonance", url: "" },
-  { name: "Ghost Transfer", url: "" },
+  { name: "Neuro Mail", url: "https://mail.neuronus.net/" },
+  { name: "Resonance", url: "https://resonance.neuronus.net/" },
+  { name: "Ghost Transfer", url: "https://ghosttransfer.neuronus.net/" },
 ];
 
 const security = [
-  { name: "Neuro RSA", url: "" },
-  { name: "Neuro SPN", url: "" },
+  { name: "Neuro RSA", url: "https://neurorsa.neuronus.net/" },
+  { name: "Neuro Password", url: "https://passwordmanager.neuronus.net" },
 ];
 
 const finance = [
@@ -36,8 +36,8 @@ const finance = [
 ];
 
 const storage = [
-  { name: "Neuro Drive", url: "" },
-  { name: "Quantumography", url: "" },
+  { name: "Neuro Drive", url: "https://drive.neuronus.net" },
+  { name: "Quantumography", url: "https://qgraphy.xyz/en" },
 ];
 
 const socialIcons = [
