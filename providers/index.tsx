@@ -1,5 +1,6 @@
 "use client";
 import { ReactNode, Suspense, useEffect, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SidebarProvider } from "./SidebarProvider";
 import { CreateAccountPopup } from "@/components/popups/CreateAccount";
 import { LoginSeeds } from "@/components/popups/LoginSeeds";
@@ -13,11 +14,11 @@ import RegisteredToolsPopup from "@/components/popups/RegisteredToolsPopup";
 
 const AppContextsInner = ({ children }: { children: ReactNode }) => {
   const searchParams = useSearchParams();
-  const activeModal = useAuthStore((state) => state.activeModal);
-  const closeModal = useAuthStore((state) => state.closeModal);
-  const openModal = useAuthStore((state) => state.openModal);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const checkAuth = useAuthStore((state) => state.checkAuth);
+  const activeModal = useAuthStore((state: any) => state.activeModal);
+  const closeModal = useAuthStore((state: any) => state.closeModal);
+  const openModal = useAuthStore((state: any) => state.openModal);
+  const isAuthenticated = useAuthStore((state: any) => state.isAuthenticated);
+  const checkAuth = useAuthStore((state: any) => state.checkAuth);
   const [showTools, setShowTools] = useState(false);
 
   useEffect(() => {
@@ -51,7 +52,11 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
         <FreeAccount isOpen={true} onClose={closeModal} />
       )}
       {activeModal === "loginSeeds" && (
-        <LoginSeeds isOpen={true} onClose={closeModal}  openTools={()=>setShowTools(true)} />
+        <LoginSeeds
+          isOpen={true}
+          onClose={closeModal}
+          openTools={() => setShowTools(true)}
+        />
       )}
       {activeModal === "seedsRegister" && (
         <SeedsRegistration isOpen={true} onClose={closeModal} />
@@ -63,16 +68,25 @@ const AppContextsInner = ({ children }: { children: ReactNode }) => {
         <SettingsPopup isOpen={true} onClose={closeModal} />
       )}
       {showTools && (
-        <RegisteredToolsPopup isOpen={showTools} onClose={()=>setShowTools(false)} />
+        <RegisteredToolsPopup
+          isOpen={showTools}
+          onClose={() => setShowTools(false)}
+        />
       )}
     </>
   );
 };
 
 export const AppContextsProvider = ({ children }: { children: ReactNode }) => {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <Suspense fallback={null}>
-      <AppContextsInner>{children}</AppContextsInner>
+      <QueryClientProvider client={queryClient}>
+        <AppContextsInner>
+          <SidebarProvider>{children}</SidebarProvider>
+        </AppContextsInner>
+      </QueryClientProvider>
     </Suspense>
   );
 };
