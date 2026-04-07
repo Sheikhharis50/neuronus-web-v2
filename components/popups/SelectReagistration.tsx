@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "../Modal";
 import NP from "@/public/icons/home/registration/NP";
 import Polygon from "@/public/icons/home/Polygon";
@@ -14,6 +16,8 @@ import NeuroCoin from "@/public/icons/NeuroCoin";
 import NFile from "@/public/icons/home/registration/NFile";
 import XFile from "@/public/icons/home/registration/XFile";
 import Quantumography from "@/public/icons/Quantumography";
+import { useAuthStore } from "@/store/useAuthStore";
+import { authService } from "@/services/auth-service";
 
 interface Props {
   isOpen: boolean;
@@ -39,6 +43,8 @@ const Icons = [
 ];
 
 export const SelectRegistration = ({ isOpen, onClose }: Props) => {
+  const openModal = useAuthStore((state) => state.openModal);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className=" pt-8 pb-6 text-center">
@@ -76,7 +82,13 @@ export const SelectRegistration = ({ isOpen, onClose }: Props) => {
           Select how you would like to proceed
         </span>
         <div className="flex justify-center flex-col items-center text-[15px] lg:text-[19px] ">
+          {/* <Button
+            onClick={() => authService.generateTotp()}
+            text="Generate TOTP"
+            className=" text-[12px] md:text-[19px]! px-18 md:px-30 py-3 md:py-5! mt-7"
+          /> */}
           <Button
+            onClick={() => openModal("createAccount")}
             text="Registration with Seeds"
             className=" text-[12px] md:text-[19px]! px-18 md:px-30 py-3 md:py-5! mt-7"
           />

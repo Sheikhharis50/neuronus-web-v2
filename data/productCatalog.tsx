@@ -38,16 +38,19 @@ export const accessNetworkProducts: ProductCatalog[] = [
 export const CommunicationProducts: ProductCatalog[] = [
   {
     title: "Neuro Mail",
+    link: "https://mail.neuronus.net/",
     description: "Encrypted, zero-knowledge email service.",
     productIcon: <NeuroMail className="text-backlight w-full h-auto" />,
   },
   {
     title: "Resonance",
+    link: "https://resonance.neuronus.net/",
     description: "Anonymous messenger with an integrated crypto wallet.",
     productIcon: <Resonance className=" text-backlight w-full h-auto" />,
   },
   {
     title: "NeuroRSA",
+    link: "https://neurorsa.neuronus.net/",
     description: "Text encryption tool using public/private keys.",
     productIcon: (
       <NeuroRSA className="w-full h-auto text-backlight -scale-y-100 -scale-x-100" />
@@ -57,21 +60,25 @@ export const CommunicationProducts: ProductCatalog[] = [
 export const vaultProducts: ProductCatalog[] = [
   {
     title: "Neuro Drive",
+    link: "https://drive.neuronus.net",
     description: "Encrypted cloud storage.",
     productIcon: <NeuroDrive className="text-backlight w-full h-auto" />,
   },
   {
     title: "Neuro Password",
+    link: "https://passwordmanager.neuronus.net",
     description: "Manager for passwords and secure notes.",
     productIcon: <NeuroPassword className="w-full h-auto" />,
   },
   {
     title: "Ghost Transfer",
+    link: "https://ghosttransfer.neuronus.net/",
     description: "Disposable, secure file transfer..",
     productIcon: <GhostTransfer className="w-full h-auto text-backlight" />,
   },
   {
     title: "Quantumography ",
+    link: "https://qgraphy.xyz/en",
     description: "Concealing data inside image files.",
     productIcon: <Quantumography className="w-full h-auto text-backlight" />,
   },
