@@ -1,4 +1,4 @@
-import apiClient from '@/lib/api-client';
+import loginApiClient from '@/lib/loginApiClient';
 import { deriveSeedsHash, generateSeedPhrase, handleSuccessfulLogin, performSignup } from '@/lib/cryptoOperations';
 import { authService } from '@/services/auth-service';
 import { toast } from 'react-toastify';
@@ -115,7 +115,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     if (isTokenExpired(token)) {
       try {
-        await apiClient.get('/api/auth/token/refresh-cookie/');
+        await loginApiClient.get('/auth/token/refresh-cookie/');
         set({ isAuthenticated: true });
       } catch {
         set({ isAuthenticated: false });

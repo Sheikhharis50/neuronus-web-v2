@@ -1,14 +1,15 @@
 import axios from 'axios';
+import { AUTH_API_URL } from '@/config/api';
 
-const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+const loginApiClient = axios.create({
+  baseURL: AUTH_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 
-apiClient.interceptors.request.use((config) => {
+loginApiClient.interceptors.request.use((config) => {
   const token =
     typeof localStorage !== 'undefined'
       ? localStorage.getItem('access_token') ?? localStorage.getItem('auth-storage')
@@ -19,4 +20,4 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-export default apiClient;
+export default loginApiClient;
