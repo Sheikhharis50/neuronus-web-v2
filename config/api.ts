@@ -1,3 +1,3 @@
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL;
-export const API_URL = `${API_BASE_URL}/api`;
-export const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN || process.env.API_TOKEN;
+export const STRAPI_API_BASE_URL = process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL || process.env.STRAPI_API_BASE_URL;
+export const STRAPI_API_URL = `${STRAPI_API_BASE_URL}/api`;
+export const STRAPI_API_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN || process.env.STRAPI_API_TOKEN;
