@@ -1,6 +1,6 @@
 "use server";
 
-import { API_URL, API_TOKEN } from "@/config/api";
+import { STRAPI_API_URL, STRAPI_API_TOKEN } from "@/config/api";
 import { FILE_CDN_URL } from "@/config/file";
 
 type BlogFile = {
@@ -73,9 +73,9 @@ export const fetchBlogs = async (
     });
   }
 
-  const response = await fetch(`${API_URL}/blogs?${params}`, {
+  const response = await fetch(`${STRAPI_API_URL}/blogs?${params}`, {
     headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
     },
   });
   const { data, meta } = await response.json();
@@ -120,9 +120,9 @@ export const fetchBlogs = async (
 };
 
 export const fetchBlogBySlug = async (locale: string, slug: string) => {
-  const slugResponse = await fetch(`${API_URL}/slugify/slugs/blog/${slug}`, {
+  const slugResponse = await fetch(`${STRAPI_API_URL}/slugify/slugs/blog/${slug}`, {
     headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
     },
   });
   const { data: slugData } = await slugResponse.json();
@@ -149,9 +149,9 @@ export const fetchBlog = async (
     locale: locale,
   });
 
-  const response = await fetch(`${API_URL}/blogs/${id}?${params}`, {
+  const response = await fetch(`${STRAPI_API_URL}/blogs/${id}?${params}`, {
     headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
     },
   });
   const { data } = await response.json();
@@ -195,11 +195,11 @@ export const fetchBlog = async (
 };
 
 export const createBlogFeedback = async (payload: any) => {
-  const response = await fetch(`${API_URL}/blog-feedbacks`, {
+  const response = await fetch(`${STRAPI_API_URL}/blog-feedbacks`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
     },
     body: JSON.stringify({ data: { ...payload, publishedAt: null } }),
   });
@@ -238,9 +238,9 @@ export const getBlogFeedbacks = async (
     "filters[blog][id][$eq]": blogId.toString(),
     locale: locale,
   });
-  const response = await fetch(`${API_URL}/blog-feedbacks?${params}`, {
+  const response = await fetch(`${STRAPI_API_URL}/blog-feedbacks?${params}`, {
     headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
+      Authorization: `Bearer ${STRAPI_API_TOKEN}`,
     },
   });
   const { data, meta } = await response.json();
