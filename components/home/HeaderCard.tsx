@@ -1,6 +1,7 @@
 import Image from "next/image";
 import NeuronusWhite from "@/public/icons/home/NeuronusWhite";
-import thunder from "@/public/images/home/header/card-thunder.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import bg from "@/public/images/home/header-card-bg.png";
 import bgMobile from "@/public/images/home/header-card-bg-mob.png";
 import dots from "@/public/images/dots-landing-header.png";
@@ -72,8 +73,8 @@ const HeaderCard = ({ classes = {}, small = false }: HeaderCardProps) => {
         }`}
       >
         {/* Thunder */}
-        <Image
-          src={thunder}
+        <AvifImage
+          src={homeAvifImages.headerCardThunder}
           alt="thunder"
           width={700}
           height={700}

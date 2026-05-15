@@ -1,5 +1,6 @@
 import Image from "next/image";
-import thunder from "@/public/images/home/header/card-thunder.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import encryption from "@/public/images/home/next-gen-encryption.png";
 import Video from "@/components/Video";
 
@@ -24,8 +25,8 @@ const EncryptionCenter = () => {
             height={500}
             className="relative w-full h-auto object-cover -rotate-90 lg:rotate-0"
           />
-          <Image
-            src={thunder}
+          <AvifImage
+            src={homeAvifImages.headerCardThunder}
             alt="thunder"
             width={500}
             height={500}
