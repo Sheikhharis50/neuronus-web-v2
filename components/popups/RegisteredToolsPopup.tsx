@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import Button from "../Button";
+import { useAuthStore } from "@/store/useAuthStore";
+import { openToolApp } from "@/lib/openToolApp";
 
 
 const APP_URLS: Record<string, string> = {
@@ -22,11 +24,6 @@ const tools = [
   { name: "GhostTransfer",  icon: "/images/transfer.svg" },
 ];
 
-const openAppWithSSO = (appUrl: string) => {
-  if (!appUrl) return;
-  window.open(appUrl, "_blank");
-};
-
 export default function RegisteredToolsPopup({
   isOpen,
   onClose,
@@ -34,6 +31,8 @@ export default function RegisteredToolsPopup({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="relative bg-[#F1F5FA] rounded-3xl shadow-2xl p-6 animate-fade-in">
@@ -66,7 +65,8 @@ export default function RegisteredToolsPopup({
                 key={tool.name}
                 onClick={() => {
                   if (appUrl) {
-                    openAppWithSSO(appUrl);
+                    onClose();
+                    openToolApp(appUrl, isAuthenticated);
                   }
                 }}
                 className="flex flex-col items-center justify-center gap-2 bg-white hover:bg-indigo-50 border border-[#EBEBEB] hover:border-indigo-200 rounded-2xl w-[138px] h-[128px] transition-all duration-200 group cursor-pointer"
