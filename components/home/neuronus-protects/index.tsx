@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Heading from "@/components/Heading";
 import Container from "@/components/Container";
 import Description from "@/components/Description";
 import ShadowButton from "@/components/ShadowButton";
 import Background from "./Background";
-import thunder from "@/public/images/home/header/card-thunder.avif";
-import question from "@/public/images/home/neuronus-protects/question.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import Coins from "./Coins";
 import Video from "@/components/Video";
 
@@ -31,15 +30,15 @@ const NeuronusProtects = () => {
       </div>
       <div className="absolute size-full bottom-0 overflow-hidden flex justify-center items-end">
         <div className="relative bottom-[27%] sm:bottom-[29%] lg:bottom-[32%] w-fit p-12">
-          <Image
-            src={thunder}
+          <AvifImage
+            src={homeAvifImages.headerCardThunder}
             alt="thunder"
             width={800}
             height={800}
             className="absolute top-0 left-0 w-full h-auto"
           />
-          <Image
-            src={question}
+          <AvifImage
+            src={homeAvifImages.protectsQuestion}
             alt="question mark"
             width={800}
             height={800}

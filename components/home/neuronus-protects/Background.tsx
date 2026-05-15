@@ -1,20 +1,19 @@
-import Image from "next/image";
-import bg from "@/public/images/home/neuronus-protects/bg.avif";
-import ellipse from "@/public/images/home/neuronus-protects/ellipse.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 
 const Background = () => {
   return (
     <>
-      <Image
-        src={bg}
+      <AvifImage
+        src={homeAvifImages.protectsBg}
         alt="coins bg"
         width={1500}
         height={1800}
         className="w-full h-180 xs:h-190 sm:h-200 md:h-210 lg:h-240 xl:h-250 2xl:h-260 object-cover"
       />
       <div className="relative">
-        <Image
-          src={ellipse}
+        <AvifImage
+          src={homeAvifImages.protectsEllipse}
           alt="ellipse bg"
           width={1500}
           height={500}

@@ -2,16 +2,16 @@ import Heading from "../../Heading";
 import Description from "../../Description";
 import { CommunicationProducts } from "@/data/productCatalog";
 import ProductCatalog from "../../ProductCatalog";
-import thunder from "@/public/images/home/data-security/thunder.avif";
-import Image from "next/image";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import Slider from "./Slider";
 import Container from "../../Container";
 
 const Communication = () => {
   return (
     <div className="relative overflow-hidden">
-      <Image
-        src={thunder}
+      <AvifImage
+        src={homeAvifImages.dataSecurityThunder}
         alt="thunder"
         width={500}
         height={500}

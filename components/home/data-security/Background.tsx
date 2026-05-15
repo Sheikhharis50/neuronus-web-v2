@@ -1,6 +1,7 @@
 import Image from "next/image";
 import bg from "@/public/images/home/data-security-bg.png";
-import thunder from "@/public/images/home/data-security/thunder.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import Video from "@/components/Video";
 
 const Background = () => {
@@ -14,8 +15,8 @@ const Background = () => {
         height={1500}
         className="absolute scale-x-125 md:scale-x-140 lg:scale-x-100 w-full lg:w-4/5 lg:translate-x-[-17%] h-1/2 lg:h-auto object-cover top-0 left-0"
       />
-      <Image
-        src={thunder}
+      <AvifImage
+        src={homeAvifImages.dataSecurityThunder}
         alt="thunder"
         width={500}
         height={500}

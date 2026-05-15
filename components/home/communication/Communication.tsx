@@ -3,7 +3,8 @@ import Heading from "../../Heading";
 import Description from "../../Description";
 import { CommunicationProducts } from "@/data/productCatalog";
 import ProductCatalog from "../../ProductCatalog";
-import thunder from "@/public/images/home/data-security/thunder.avif";
+import AvifImage from "@/components/AvifImage";
+import { homeAvifImages } from "@/data/homeAvifImages";
 import Image from "next/image";
 import MessageCard1 from "./messaging/MessageCard1";
 import MessageCard2 from "./messaging/MessageCard2";
@@ -17,8 +18,8 @@ const Communication = () => {
   return (
     <div className="pt-10 lg:pt-0 pb-16 md:pb-24 -mt-5 overflow-hidden">
       <div className="relative">
-        <Image
-          src={thunder}
+        <AvifImage
+          src={homeAvifImages.dataSecurityThunder}
           alt="thunder"
           width={500}
           height={500}
