@@ -4,11 +4,8 @@ import Toolbox from "@/public/icons/Toolbox";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import Button from "../Button";
-
-const openAppWithSSO = (appUrl: string) => {
-  if (!appUrl) return;
-  window.open(appUrl, "_blank");
-};
+import { useAuthStore } from "@/store/useAuthStore";
+import { openToolApp } from "@/lib/openToolApp";
 
 const APP_URLS: Record<string, string> = {
   "Neuro Mail":    "https://mail.neuronus.net",
@@ -35,6 +32,7 @@ interface ToolsPopupProps {
 export const ToolsPopup = ({ trigger }: ToolsPopupProps) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -93,7 +91,11 @@ export const ToolsPopup = ({ trigger }: ToolsPopupProps) => {
               return (
                 <button
                   key={tool.name}
-                  onClick={() => !disabled && openAppWithSSO(url)}
+                  onClick={() => {
+                    if (disabled) return;
+                    setOpen(false);
+                    openToolApp(url, isAuthenticated);
+                  }}
                   disabled={disabled}
                   className={`tool-card flex flex-col items-center justify-center sm:gap-1.5 py-1.5 sm:py-3 px-2 rounded-2xl border transition-all duration-200 group
                     ${disabled

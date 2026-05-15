@@ -222,6 +222,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isAuthenticated: false, activeModal: null, requires2FA: false, tempSeeds: null });
     const bc = new BroadcastChannel("auth_sync");
     bc.postMessage({ type: "SESSION_TERMINATED" });
-    bc.close(); 
+    bc.close();
   },
 }));
